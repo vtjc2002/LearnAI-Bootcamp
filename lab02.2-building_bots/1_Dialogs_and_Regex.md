@@ -11,7 +11,7 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Download the Bot Framework Emulator  
 
-You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and download the most recent version of the emulator (select the ".exe" file, if you are using windows).  
+You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and download the most recent version of the emulator that has the tag "Latest Release" (select the ".exe" file, if you are using windows).  
 
 The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-4.0.15\botframework-emulator.exe` or to your Downloads folder, depending on browser.  
 
@@ -29,7 +29,12 @@ Select **OK**. You'll now see a template for a simple Echo Bot that can echo use
 
 >**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "lab02.2-bulding_bots," and add all the files of type "MD File." 
 
-Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." Install all of the packages listed below (you may already have some of these and that is fine, you shouldn't need to reinstall or update them).  Make sure you check the box "Include prerelease" and are on the "Browse" tab. After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
+Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." **Do not update Microsoft.AspNetCore.All**. Install all of the packages listed below. Make sure you check the box "Include prerelease" and are on the "Browse" tab:  
+* Microsoft.Bot.Builder.AI.LUIS
+* Microsoft.Bot.Builder.Dialogs
+* Microsoft.Azure.Search
+
+After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
  
 * Microsoft.AspNetCore.All
 * Microsoft.Bot.Builder.Integration.AspNet.Core
@@ -117,14 +122,13 @@ namespace PictureBot
     /// </summary>
     public class UserData
     {
-
         public string Greeted { get; set; } = "not greeted";
-
+        public string searchTerms { get; set; } = "";
     }
 }
 ```
 
-Save the file. This is where we'll store information about the active conversation. You can see we're also keeping track of whether we've greeted the user, so we don't do it more than once. This should address our error in Startup.cs. Confirm this.  
+Save the file. This is where we'll store information about the active conversation. You can see we're keeping track of whether we've greeted the user, so we don't do it more than once. Later, we'll use this to also keep track of what users are searching for. This should address two of our errors in Startup.cs. Confirm this.  
 
 Create a PictureBot.cs class file. Update the file to this:  
 ```csharp
@@ -155,7 +159,7 @@ Now start your bot (with or without debugging) by pressing the "IIS Express" but
 * Your default.htm page will be displayed in a browser.
 * Note the localhost port number for the page. You will need this information to interact with your bot.  
 
-Get stuck? You can find the solution for the lab up until this point under [resources/code/FinishedPictureBot-Part0](./resources/code/FinishedPictureBot-Part0).
+Get stuck? You can find the solution for the lab up until this point under [resources/code/FinishedPictureBot-Part0](./resources/code/FinishedPictureBot-Part0). The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.  
 
 #### Using the Bot Framework Emulator  
 To interact with your bot:
@@ -209,6 +213,8 @@ using PictureBot.Responses;
 using PictureBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using System;
+using Microsoft.Bot.Builder.Core.Extensions;
 
 namespace PictureBot.Dialogs
 {
@@ -222,8 +228,10 @@ namespace PictureBot.Dialogs
         public SearchDialog() : base(Id)
         {
             // add search dialog contents here
+
         }
         // process search below
+        
     }
 }
 ```
@@ -249,7 +257,6 @@ using Microsoft.Bot.Builder.Ai.LUIS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Azure.Search;
-using Microsoft.Azure.Search.Models;
 
 namespace PictureBot
 {
@@ -380,6 +387,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Bot.Builder.Core.Extensions;
+using Microsoft.Bot.Schema;
 
 namespace PictureBot.Responses
 {
@@ -429,7 +438,7 @@ Before continuing with the lab, learn more about middleware and the Bot Framewor
 
 Ultimately, we'll use some middleware to try to understand what users are saying with regular expressions (Regex) first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    
 
-To add the middleware for Regex to your solution, create a new folder called "Middleware," and add the contents of the "Middleware" folder (you can find this under **resources > code**) to your solution. You can also use this middleware in your future projects.
+To add the middleware for Regex to your solution, create a new folder called "Middleware," and add the contents of the "Middleware" folder (you can find this under **resources > code**) to your solution. **You can also use this middleware in your future projects!**
 
 In "Startup.cs", below the "Add Regex ability below" comment within `ConfigureServices`, add the following:
 ```csharp
@@ -457,6 +466,9 @@ Based on our results from Regex, we need to direct the conversation in the right
                 {
                     // Get the state of the conversation 
                     var conversation = ConversationState<ConversationInfo>.Get(dc.Context);
+                    var state = UserState<UserData>.Get(dc.Context);
+                    // clear out state.searchTerms for future searches
+                    state.searchTerms = "";
                     // If Regex picks up on anything, store it
                     var recognizedIntents = dc.Context.Services.Get<IRecognizedIntents>();
                     // Based on the recognized intent, direct the conversation
@@ -487,9 +499,13 @@ Based on our results from Regex, we need to direct the conversation in the right
 ```
 
 
-Hit F5 to run the bot. Test it by sending commands like "help", "share pics", "order pics", and "search pics". If the only thing that failed was "search pics", everything is working how you configured it. But why is "search pics" failing? Have an answer before you move on!
+Hit F5 to run the bot. Test it by sending commands like "help", "share pics", "order pics", and "search pics". If the only thing that failed was "search pics", everything is working how you configured it. "search pics" failing is the expected behavior at this point in the lab, but why? Have an answer before you move on!  
 
-Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part1](./resources/code/FinishedPictureBot-Part1).
+> Hint: Trace matching to case "search", starting from PictureBot.cs.  
+
+In the next lab, we will address the search error.
+
+Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part1](./resources/code/FinishedPictureBot-Part1). The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.  
 
 
 

@@ -15,7 +15,7 @@ This workshop demonstrates how you can perform testing using the Microsoft Bot F
 ## Prerequisites
 
 #### Lab02.2-building_bots  
-This lab starts from the assumption that you have built and published the bot from `lab02.2-building_bots`. It is recommended that you do that lab in order to be successful in the ones that follow. If you have not, reading carefully through all the exercises and looking at some of the code or using it in your own applications may be sufficient, depending on your needs. We'll also assume that you've completed `lab02.3-logging_chat_conversations`, but you should be able to complete the labs without completing the logging labs.  
+This lab starts from the assumption that you have built and published the bot from `lab02.2-building_bots`. It is recommended that you do that lab in order to be successful in the ones that follow. If you have not, reading carefully through all the exercises and looking at some of the code or using it in your own applications may be sufficient, depending on your needs. We'll also assume that you've completed `lab02.5-logging_chat_conversations`, but you should be able to complete the labs without completing the logging labs.  
 
 #### Have access to Azure  
 You will need to have access to portal and be able to create resources on Azure.   

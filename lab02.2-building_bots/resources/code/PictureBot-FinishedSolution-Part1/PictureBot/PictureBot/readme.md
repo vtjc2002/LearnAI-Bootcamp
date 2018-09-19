@@ -1,2 +1,2 @@
-﻿# EchoBot hosted in ASP.NET Core
-This sample shows how to integrate a simple EchoBot bot with ASP.Net Core 2. 
+﻿# Things to add to use this solution
+No keys have been added yet. Just build and run.

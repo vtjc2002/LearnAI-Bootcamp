@@ -7,6 +7,8 @@ using PictureBot.Responses;
 using PictureBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using System;
+using Microsoft.Bot.Builder.Core.Extensions;
 
 namespace PictureBot.Dialogs
 {
@@ -21,6 +23,6 @@ namespace PictureBot.Dialogs
         {
             // add search dialog contents here
         }
+        // process search below
     }
 }
-

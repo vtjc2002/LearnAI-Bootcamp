@@ -12,8 +12,7 @@ namespace PictureBot
     /// </summary>
     public class UserData
     {
-
         public string Greeted { get; set; } = "not greeted";
-
+        public string searchTerms { get; set; } = "";
     }
 }

@@ -7,6 +7,8 @@ using PictureBot.Responses;
 using PictureBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using System;
+using Microsoft.Bot.Builder.Core.Extensions;
 
 namespace PictureBot.Dialogs
 {
@@ -25,22 +27,28 @@ namespace PictureBot.Dialogs
             {
                 async (dc, args, next) =>
                 {
+                    // Add state so we know if a user has told us what they want to search for
+                    var state = UserState<UserData>.Get(dc.Context);
                     // Prompt the user for what they want to search for.
                     // Instead of using SearchResponses.ReplyWithSearchRequest,
                     // we're experimenting with using text prompts
-                    await dc.Prompt("textPrompt", "What would you like to search for?");
+                    if (state.searchTerms == "")
+                        await dc.Prompt("textPrompt", "What would you like to search for?");
+                    else
+                        await next();
                 },
                 async (dc, args, next) =>
                 {
-                    // Save search request as 'facet'
-                    var facet = args["Value"] as string;
-
-                    await SearchResponses.ReplyWithSearchConfirmation(dc.Context, facet);
-
+                    // Add state so we know if a user has told us what they want to search for
+                    var state = UserState<UserData>.Get(dc.Context);
+                    if (state.searchTerms == "")
+                        state.searchTerms = args["Value"] as string;
+                    var searchText = state.searchTerms;
+                    await SearchResponses.ReplyWithSearchConfirmation(dc.Context, searchText);
                     // Process the search request and send the results to the user
-                    await StartAsync(dc.Context, facet);
+                    await StartAsync(dc.Context, searchText);
 
-                    // End the dialog
+                    // end the dialog
                     await dc.End();
 
                 }
@@ -48,8 +56,7 @@ namespace PictureBot.Dialogs
             // Define the prompts used in this conversation flow.
             this.Dialogs.Add("textPrompt", new TextPrompt());
         }
-        //process search below
-
+        // process search below
         public async Task StartAsync(ITurnContext context, string searchText)
         {
             ISearchIndexClient indexClientForQueries = CreateSearchIndexClient();
@@ -95,4 +102,3 @@ namespace PictureBot.Dialogs
         }
     }
 }
-

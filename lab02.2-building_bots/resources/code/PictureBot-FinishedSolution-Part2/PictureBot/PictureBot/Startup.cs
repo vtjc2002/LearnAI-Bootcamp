@@ -49,6 +49,7 @@ namespace PictureBot
                 .AddIntent("share", new Regex("share picture(?:s)*(.*)|share pic(?:s)*(.*)", RegexOptions.IgnoreCase))
                 .AddIntent("order", new Regex("order picture(?:s)*(.*)|order print(?:s)*(.*)|order pic(?:s)*(.*)", RegexOptions.IgnoreCase))
                 .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase)));
+
                 // Add LUIS ability below
 
             });

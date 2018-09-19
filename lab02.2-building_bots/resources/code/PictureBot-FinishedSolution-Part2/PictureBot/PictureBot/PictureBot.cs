@@ -12,7 +12,6 @@ using Microsoft.Bot.Builder.Ai.LUIS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Azure.Search;
-using Microsoft.Azure.Search.Models;
 
 namespace PictureBot
 {
@@ -74,6 +73,9 @@ namespace PictureBot
                 {
                     // Get the state of the conversation 
                     var conversation = ConversationState<ConversationInfo>.Get(dc.Context);
+                    var state = UserState<UserData>.Get(dc.Context);
+                    // clear out state.searchTerms for future searches
+                    state.searchTerms = "";
                     // If Regex picks up on anything, store it
                     var recognizedIntents = dc.Context.Services.Get<IRecognizedIntents>();
                     // Based on the recognized intent, direct the conversation
@@ -101,9 +103,8 @@ namespace PictureBot
                             break;
                     }
                 }
-
             });
-            
+
             // Add our child dialogs (in this case just one)
             dialogs.Add(SearchDialog.Id, SearchDialog.Instance);
 

@@ -16,23 +16,26 @@ Open "SearchDialog.cs" and review the code below. After you have an understandin
             {
                 async (dc, args, next) =>
                 {
+                    // Add state so we know if a user has told us what they want to search for
+                    var state = UserState<UserData>.Get(dc.Context);
                     // Prompt the user for what they want to search for.
                     // Instead of using SearchResponses.ReplyWithSearchRequest,
                     // we're experimenting with using text prompts
-                    await dc.Prompt("textPrompt", "What would you like to search for?");
+                    if (state.searchTerms == "")
+                        await dc.Prompt("textPrompt", "What would you like to search for?");
+                    else
+                        await next();
                 },
                 async (dc, args, next) =>
                 {
-                    // Save search request as 'facet'
-                    var facet = args["Value"] as string;
-
-                    await SearchResponses.ReplyWithSearchConfirmation(dc.Context, facet);
-
+                    // Add state so we know if a user has told us what they want to search for
+                    var state = UserState<UserData>.Get(dc.Context);
+                    if (state.searchTerms == "")
+                        state.searchTerms = args["Value"] as string;
+                    var searchText = state.searchTerms;
+                    await SearchResponses.ReplyWithSearchConfirmation(dc.Context, searchText);
                     // Process the search request and send the results to the user
-                    await StartAsync(dc.Context, facet);
-
-                    // End the dialog
-                    await dc.End();
+                    await StartAsync(dc.Context, searchText);
 
                 }
             });
@@ -103,13 +106,13 @@ Set the value for the "YourSearchServiceKey" to be the key for this service.  Th
 
 ![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
 
-Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index.  
+Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index in the Azure Search lab.  
 
 Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
 
 You might notice that if you run the bot, and immediately try to search for pictures, you are greeted instead. Why is that? Hint: review the `OnTurn` task in PictureBot.cs.
 
-Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part2](./resources/code/FinishedPictureBot-Part2).  
+Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part2](./resources/code/FinishedPictureBot-Part2). The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.   
 
 ### Continue to [3_LUIS](./3_LUIS.md)  
 Back to [README](./0_README.md)
