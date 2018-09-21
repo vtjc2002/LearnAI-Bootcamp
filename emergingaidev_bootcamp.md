@@ -67,7 +67,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 The LearnAI team has related materials that may be of interest:
 - [Lab 2.5: Log Chat Conversations in your Bot](./lab02.5-logging_chat_conversations/0_README.md)
 - [Lab 2.6: Testing your Bot](./lab02.6-testing_bots/0_README.md)
-- [LearnAI: Intelligent Apps + Agents: Design and Architecture](https://aka.ms/daaia)
+- [LearnAI: Intelligent Agents: Design and Architecture](https://aka.ms/daaia)
 - [LearnAI: Building Enterprise Cognitive Search Solutions](https://aka.ms/csw)
 
 
