@@ -1,47 +1,28 @@
 ## 4_Publish_and_Register:
 Estimated Time: 10-15 minutes
 
-### Lab 4.1: Publish your bot
+### Lab 4.1: Re-publish your bot
 
-A bot created using the Microsoft Bot Framework can be hosted at any publicly-accessible URL.  For the purposes of this lab, we will register our bot using [Azure Bot Service](https://docs.microsoft.com/en-us/bot-framework/bot-service-overview-introduction).
+As you may recall, in the first section of this lab, you deployed a simple Echo Bot using Azure Bot Service. You've since changed the code quite substantially to create your PictureBot. What you'll do next is re-publish your bot to the same Azure Web App Bot.
 
-Navigate to the portal. In the portal, click "Create a resource" and search for "bot". Select Web App Bot, and click create. For the name, you'll have to create a unique identifier. I recommend using something along the lines of PictureBot[i][n] where [i] is your initials and [n] is a number (e.g. mine would be PictureBotamt40). Put in the region that is closest to you.
-For pricing tier, select F0, as that is all we will need for this workshop. Don't change the bot template from the default "Basic (C#)", we will overwrite it with our PictureBot. Configure a new App service plan (put it in the same location as your bot). You can choose to turn Application Insights on or off. Do not change or click on "Microsoft App ID and password", we will get to that later. Click create.
+First, you need to locate your user password for publishing which can be found in **PostDeployScripts > _web_app_name_.PublishSettings > userPWD**. Copy password value.
 
-![Create an Azure Bot Service](./resources/assets/CreateBot.png) 
+Next, right-click on your project and select "Publish...". Your Publish Profile should appear, configured with all your application's settings. When you select "Publish", you'll be prompted for the user password you just copied. Paste it in and select OK.  
 
-You have just deployed a very simple EchoBot with their template. What we will do next is publish our PictureBot to this bot service.
+> Alternatively, you can select the "Settings..." button and save your password, so you don't have to enter it every time you want to publish.
 
-First we need to grab a few keys. Go to the Web App Bot you just created (in the portal). Under App Service Settings, select **Application Settings** and scroll down to the App settings section. Grab the MicrosoftAppId and MicrosoftAppPassword. You will need them in a moment.
+Once your Web App Bot has successfully republished to Azure Bot Service, you'll get a pop-up web page, similar to that of when you run the bot locally. The difference is that the URL should match your bot's published URL. You can close this window.  
 
-Return to your PictureBot in Visual Studio. Navigate to the file called "appsettings.json" to your project. In this file, fill in your MicrosoftAppId and MicrosoftAppPassword with the values for your web app bot:  
-```json
-{
+### Lab 4.2: Testing the published bot
 
-  "MicrosoftAppId": "YourAppId",
-  "MicrosoftAppPassword": "YourAppPassword"
+#### Using the Emulator
 
-}
-```
-Save the file.  
+Open your emulator and open the same ".bot" file you used to test your bot locally. However, instead of using the "development" endpoint, select the "production" endpoint. Test it out and confirm that you're PictureBot was successfully published.  
 
-In the Solution Explorer, right-click on your Bot Application project and select "Publish".  This will launch a wizard to help you publish your bot to Azure.  
-
-Select the publish target of "Azure App Service" and "Select Existing." On the "Publish" button, use the drop-down menu to select "Create Profile" instead of "Publish Immediately." Select "Create Profile" to continue.
+In your future bot endeavors, being able to compare the published and the local bot side-by-side easily is an awesome feature. 
 
 
-![Publish Bot to Azure App Service](./resources/assets/PublishTarget.png) 
-
-On the App Service screen, select the appropriate subscription, resource group, and your Bot Service. Select OK.
-
-![Create App Service](./resources/assets/AzureAppService.png) 
-
-Within the "Summary" section of the "Publish" tab, select "Settings...", and then select the "Settings" tab on the new "Publish" window
-Now, you will see the Web Deploy settings. Select "File Publish Options" and check the box next to "Remove additional files at destination". Click "Save" to exit the window, and now click "Publish".  The output window in Visual Studio will show the deployment process.  Then, your bot will be hosted at a URL like http://picturebotamt6.azurewebsites.net/, where "picturebotamt6" is the Bot Service app name.  
-
-![Edit the Settings](./resources/assets/RemoveFiles.png) 
-
-### Managing your bot from the portal
+#### Using the portal
 
 Return to the portal to your Web App Bot resource. Under Bot Management, select "Test in Web Chat" to test if your bot has been published and is working accordingly. If it is not, review the previous lab, because you may have skipped a step. Re-publish and return here.
 
@@ -49,16 +30,7 @@ After you've confirmed your bot is published and working, check out some of the 
 
 Want to learn more about the various aspects related to bots? Spend some time reading the [how to's and design principles](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles?view=azure-bot-service-4.0). You can also check out [this course on designing and architecting intelligent agents](https://aka.ms/daaia).  
 
-### Testing your published bot in the emulator
-
-There are a few things you need to configure to test your published bot locally.
-
-1. Download ngrok from this website: https://ngrok.com/download. Click "Save as" when you download it so you can control where it gets saved (pick your Documents or Downloads folder, it should default to Downloads). Next, navigate to the install location and unzip the file (right click and select "Extract all...") and extract it one level up from the downloaded file (e.g. to  C:\Users\antho\Downloads\).  
-2. Open the Bot Framework Emulator and hit the settings button (gear icon in bottom left corner). In the "Path to ngrok" box, hit "Browse," find "ngrok.exe", click "Select ngrok", and then click "Save". Also, confirm the box is checked for "Use version 1.0 authentication tokens."  
-3. Run your PictureBot.sln and open your PictureBot.bot file in the emulator. Under endpoint, right-click "PictureBot" and select "Edit settings", and fill in your App Id and App Password before selecting "Submit."
-4. You should now be able to test changes to your bot locally.
-
-For more information on testing bots, we recommend you review the supplementary materials in [lab02.6-testing_bots](../lab02.6-testing_bots/0_README.md).
+For more information on testing bots or using the Direct Line channel, we recommend you review the supplementary materials in [lab02.6-testing_bots](../lab02.6-testing_bots/0_README.md).
 
 ### Continue to [5_Closing](./5_Closing.md)  
 Back to [README](./0_README.md)

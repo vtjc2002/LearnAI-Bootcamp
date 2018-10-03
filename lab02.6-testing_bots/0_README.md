@@ -2,6 +2,8 @@
 
 This hands-on lab guides you through some of the basics of testing bots.  
 
+>**!Important Note!**: These labs have not been updated since August 1, 2018. When they are updated, we'll update this note.
+
 ## Objectives 
 
 This workshop demonstrates how you can perform testing using the Microsoft Bot Framework. After completing these labs, you should be able to:  

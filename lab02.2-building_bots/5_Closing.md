@@ -11,7 +11,7 @@ You should have learned:
 - How to build, train and publish a LUIS model to help your bot communicate effectively
 - How to build an intelligent bot using Microsoft Bot Framework that leverages LUIS and Azure Search  
 
-In the next lab, we'll talk about additions to a bot that's already been deployed, you'll add Bing Search to your bot. In supplementary labs, you can learn more about logging and testing bots, as well as how to design and architect intelligent agents.  
+In the next lab, we'll talk about additions to a bot that's already been deployed; you'll add Bing Search to your bot. In supplementary labs, you can learn more about logging and testing bots, as well as how to design and architect intelligent agents.  
 
 Other resources for future projects/learning:
 - [Azure Bot Services documentation](https://docs.microsoft.com/en-us/bot-framework/)

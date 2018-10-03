@@ -6,6 +6,8 @@ layout: default
 
 This hands-on lab guides you through enabling various logging scenarios for your bot solutions.  
 
+>**!Important Note!**: These labs have not been updated since August 1, 2018. When they are updated, we'll update this note.
+
 ## Objectives
 This workshop demonstrates how you can perform logging using Microsoft Bot Framework and store aspects of chat conversations. After completing these labs, you should be able to:  
 
