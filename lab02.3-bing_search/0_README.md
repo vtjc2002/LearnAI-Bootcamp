@@ -5,14 +5,8 @@ This hands-on lab guides you through enhancing a published bot (through Azure Bo
 
 ## Objectives
 In this lab, you will:
-- Understand how to add Bing Search APIS (specifically the Bing Image Search API) to enhance applications
-- Build upon an existing published bot to add Bing Search capabilities
-
-
-While there is a focus on the Bing Search APIs and the Microsoft Bot Framework, you will also leverage the following technologies:
-
-- Data Science Virtual Machine (DSVM)
-- Visual Studio
+- Understand how adding Bing Search capabilities can enhance applications
+- Integrate a Bing Search API (specifically Bing Image Search) into an existing bot application
 
 
 ## Prerequisites
@@ -38,13 +32,13 @@ There are several directories in the [resources](./resources) folder:
 
 - **assets**, **instructor**: You can ignore these folders for the purposes of this lab.
 - **code**: In here, there is one directory you might use:
-	- **FinishedPictureBot-Bing**: This solution file here contains the code used to called the Bing Search API. If you get stuck in the lab, you can refer here.
+	- **FinishedPictureBot-Bing**: This solution file here contains the code used to call the Bing Search API. If you get stuck in the lab, you can refer here.
 
 > You need Visual Studio to run these labs. If you have already deployed a Windows Data Science Virtual Machine for one of the labs, we recommend using that.
 
 ## Collecting the Keys
 
-You probably already have a list of keys, we'll just be adding one more for this lab. We recommend storing the new keys in the same text file you created earlier.
+You should already have a list of keys, we'll just be adding one more for this lab. We recommend storing the new keys in the same text file you created earlier.
 
 >_Keys_
 >- Bing Image Search key: 

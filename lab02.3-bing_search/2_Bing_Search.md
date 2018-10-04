@@ -1,23 +1,10 @@
 ## 2_Bing_Search:
 Estimated Time: 45-60 minutes
 
-Before we get into the lab, let's back up and talk about the Bing Search APIs. The Bing Search APIs add intelligent search to your app, combining hundreds of billions of webpages, images, videos, and news to provide relevant results with no ads.  
-
-The Bing Search APIs fall into the "search" category of [Azure Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/), and there are currently eight of them:  
-* [Bing News Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web): Returns a list of news articles that Bing determines are relevant to a user's query
-* [Bing Web Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/overview): Returns similar results as Bing, can include web pages, images, videos, and more
-* [Bing Video Search](https://docs.microsoft.com/en-us/azure/cognitive-services/Bing-Video-Search/search-the-web): Returns videos that Bing determines are relevant to a query
-* [Bing Autosuggest](https://docs.microsoft.com/en-us/azure/cognitive-services/Bing-Autosuggest/get-suggested-search-terms): Lets you send a partial search query to Bing and get back a list of suggested queries that other users have search on. For example, as the user enters each character of their search term, you'd call this API and populate the search box's drop-down list with the suggested query strings.
-* [Bing Entity Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-entities-search/search-the-web): Returns information about entities that Bing determines are relevant, including entities (well-known people, places or things) and places (restaurants, hotels, local businesses).
-* [Bing Image Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-image-search/overview): Returns images that Bing determines are relevant to a user's query
-* [Bing Visual Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/overview): Returns insights about an image such as visually similar images, shopping sources for products found in the image, and related searches. Here's a [blog post](https://azure.microsoft.com/en-us/blog/bing-visual-search-and-entity-search-apis-for-video-apps/) and [video](https://www.youtube.com/watch?time_continue=1&v=fj1BX2INbZE).
-* [Bing Custom Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-custom-search/overview): Specify the domains, subsites, and webpages that Bing searches, customizing search experiences for different topics  
-
-Take a few minutes to explore some the capabilities of the various service (each link should take you to more information about the service). Discuss with your neighbor at least one things you learned that the Bing Search APIs can do that you did not know.  
 
 Now that you have an overview of the various services that are available around search, you will implement just one of the services, to see how it might be done. The same API key can be used to access all services and they are called in similar ways, so once you can add Bing Image Search to your applications, calling other Bing Search APIs *should* be fairly straightforward.  
 
-This lab had four parts:  
+This lab has four parts:  
 
 1. Create a Bing Search service
 2. Update `SearchResponses`
@@ -36,87 +23,177 @@ Once you click this, you'll have to fill out a few fields as you see fit. For th
 ![Create Bing Search](./resources/assets/aportal2.png)  
 
 
-Once creation is complete, open the panel for your new Bing Search service, find the key, and store with your list of keys.  
+Once creation is complete, open the panel for your new Bing Search service, find the key, and store it with your list of keys.  
 
-## Lab 2.2: Update `SearchResponses`  
+### Lab 2.2: Update your responses and prompts
 
 Before you update the dialog and the calls to Bing Search, you need to prep some messages that the bot will send to the user. The general idea is after you return the results from Azure Search, you'll give users a choice to search Bing as well. Depending on their response, you'll either confirm their search and return the results or end the dialog so they can make new searches or other requests.  
 
-Open your PictureBot.sln in Visual Studio and navigate to `SearchResponses.cs. The first thing is to ask the user if they want to view the web results from Bing.  
+Open your PictureBot.sln in Visual Studio and navigate to "PictureBot.cs". The first thing is to ask the user if they want to view the web results from Bing.  
 
-Recall, in "lab02.2-building_bots", you used [prompts from the dialog library](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0&tabs=csharp) to ask the user what they want to search for. If you don't remember, review the first part of your `SearchDialog`.  
+Recall, in "lab02.2-building_bots", you used [prompts from the dialog library](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0&tabs=csharp) to ask the user what they want to search for. If you don't remember, review your `SearchDialog`.  
 
-In this lab, we'll explore using instead. Suggested actions basically allow users to click (or tap depending on device) quick replies using buttons, without having to type out a full response. There are different arguments for using suggested actions vs [cards](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=csharp#send-a-hero-card), but a key difference is with a suggested action, after the user makes a selection, the buttons go away and with cards they don't. This makes it so later on in the conversation, the user can't select a button that is no longer relevant to the current conversation.  
+In this lab, we'll explore using prompting with suggested actions (`ChoicePrompt`) instead of just text. Suggested actions basically allow users to click (or tap depending on device) quick replies using buttons, without having to type out a full response. There are different arguments for using suggested actions vs [cards](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=csharp#send-a-hero-card), but a key difference is with a suggested action, after the user makes a selection, the buttons go away and with cards they don't. This makes it so later on in the conversation, the user can't select a button that is no longer relevant to the current conversation.  
 
 > We recommend reading more about [suggested actions](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-suggested-actions?view=azure-bot-service-4.0&tabs=csharp), [prompts](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0&tabs=csharp), and [other media](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=csharp).  
 
-Within `SearchResponses`, create a three new responses:
-1. `ReplyWithAskBing` that uses suggested actions to ask the user if they want to view the web results from Bing.
-2. `ReplyWithBingConfirmation` that tells the user you are searching Bing with what they wanted to search for. 
-3. `ReplyWithBingResults` which you'll send to the user once we get the results, basically saying here are the top five results for what you searched for.
-> Hint 1: [This reference may help you.](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-suggested-actions?view=azure-bot-service-4.0&tabs=csharp)  
-> Hint 2: 2 and 3 are similar in structure to `ReplyWithSearchConfirmation`.  
+Now, add an additional waterfall step (call it `SearchBingAsync`) to your `search_waterfallsteps`. This is ultimately where we'll call Bing and return the results.  
 
-If you get stuck, the solution is under **resources > code**.
-
-## Lab 2.3: Update `SearchDialog` to call Bing Image Search
-Now that you've got your responses ready, you can update our SearchDialog to ask the user if they want to search Bing, make a search to Bing if they say yes, and return the top five results from Bing in a message.  
-
-Open `SearchDialog` and locate where the dialog ends. Replace:
+Next, since you'll be using an additional prompt, below `_dialogs.Add(new TextPrompt("searchPrompt"));` you'll need to add your Bing prompt that you'll use to ask the user if they'd also like to get the web results from Bing. Add the following:
 ```csharp
-                    // end the dialog
-                    await dc.End();
+_dialogs.Add(new ChoicePrompt("bingPrompt"));
 ```
-with
+Create a shell for `SearchBingAsync` below your `SearchAsync` task by adding the following:
 ```csharp
-                    // Asking the user if they also want to search Bing for results.
-                    // You could also use ChoicePrompt from the prompt library, but we're
-                    // giving you a glimpse of using Cards
-                    await SearchResponses.ReplyWithAskBing(dc.Context);
-```
-Instead of ending the dialog, we are going to continue the dialog by asking them if they want to search Bing. Next, we have to create another step in the dialog by adding the following shell:
-```csharp
-                ,
-                async (dc, args, next) =>
-                {
-
-                }
-```
-Hopefully, you've noticed by now that when we add another turn to a dialog, we can use the above shell.  
-
-The first things we want to do when we get a response is get what the user searched for in Azure Search and get what the user responded to "Would you like to view the web results from Bing?". Add this within the `{ }`:
-```csharp
-                    // Add state so you know what they searched for
-                    var state = UserState<UserData>.Get(dc.Context);
-                    var searchText = state.searchTerms;
-                    // Grab the response of if they want to search Bing
-                    var searchbing = dc.Context.Activity.Text;
-                    // Build a case statement to search Bing if they said Yes
-                    // and end the dialog if they say No
-```
-Before you try to fill in the case statement, let's create a task called "SearchBing" above the commented line `//process search async`:
-```csharp
-        public async Task SearchBing(ITurnContext context, string searchText)
+        private async Task<DialogTurnResult> SearchBingAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-
+            throw new NotImplementedException();
         }
 ```
-The first thing you have to do is initialize the client. Add the following to the SearchBing task:
+
+Next, navigate to your `SearchAsync` task. At the end, you should notice that you reset the search and the searching parameters. Well, you don't want to do that if you might be calling Bing Search. You'll need to wait to end the dialog and clear the state until after the user has either told you they don't want to search Bing, or you've called Bing and gotten the results. This is what you'll do in `SearchBingAsync`, so cut the following code from `SearchAsync` and paste it into `SearchBingAsync` (and remove the `throw new NotImplementedException();` from `SearchBingAsync`). 
+
 ```csharp
-            //IMPORTANT: replace this variable with your Cognitive Services subscription key.
-            string subscriptionKey = "YourKeyHere";
-            //initialize the client
-            var client = new ImageSearchAPI(new ApiKeyServiceClientCredentials(subscriptionKey));
+            // Clear out Search or future searches, set the searching state to no,
+            // update the conversation state
+            state.Search = "";
+            state.Searching = "no";
+            await _accessors.ConversationState.SaveChangesAsync(stepContext.Context);
+
+            return await stepContext.EndDialogAsync();
 ```
-Replace "YourKeyHere" with your Bing Search API key. This is where you may get some errors. You'll need to add the following to your `using` statements:
+> You can ignore the errors around `state` for now.  
+
+
+Instead of clearing the search and ending the dialog in `SearchAsync`, which you've now removed, you want to prompt the user and update `state.Searching` to `bing` as an indicator that you've prompted them and are awaiting a response.  
+
+Below `await StartAsync(stepContext.Context, searchText);` in the `SearchAsync` task, review and add the following:
+```csharp
+            // Check if they want to search Bing
+            if (state.Searching == "yes")
+            {
+                // update the searching state to "bing"
+                state.Searching = "bing";
+                await _accessors.ConversationState.SaveChangesAsync(stepContext.Context);
+                return await stepContext.PromptAsync("bingPrompt", new PromptOptions
+                {
+                    Prompt = MessageFactory.Text("Would you like to view the web results from Bing?"),
+                    Choices = ChoiceFactory.ToChoices(new List<string> { "Yes", "No" }),
+
+                },
+                cancellationToken);
+            }
+            else //if (state.Searching == "bing") // This means they just told us if they want to search Bing or not
+            {
+                // Go to the next step in the dialog, which is "SearchBingAsync"
+                return await stepContext.NextAsync();
+            }
+```
+
+You may get an error around `ChoiceFactory` and `List<string>`. Can you fix it? 
+> Hint: `ChoiceFactory` is located within `Microsoft.Bot.Builder.Dialogs.Choices` and the ability to use lists comes from `System.Collections.Generic`.
+
+Now, before we get any further in building `SearchBingAsync`, you need to add a few responses to "SearchResponses.cs". Navigate to the file and create three new responses:
+
+1. `ReplyWithBingConfirmation` that tells the user you are searching Bing with what they wanted to search for. 
+2. `ReplyWithBingResults` which you'll send to the user once you get the results, basically saying here are the **top five** results for what you searched for.  
+3. `ReplyWithDontBing` which you'll send to the user if they choose not to search Bing (e.g. "OK, I won't search Bing.")
+> Hint: The responses for 1 and 2 are similar in structure to `ReplyWithSearchConfirmation`.  
+
+If you get stuck, you can peek at the solution under **resources > code**.
+
+### Lab 2.3: Update `SearchBingAsync` 
+Now that you've got your responses ready, you can update `SearchBingAsync` to make a search to Bing if they respond yes to your prompt, and then return the top five results from Bing in a message.  
+
+Open "PictureBot.cs" and locate where you created `SearchBingAsync`. It should look like this:
+```csharp
+        private async Task<DialogTurnResult> SearchBingAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            // Clear out Search or future searches, set the searching state to no,
+            // update the conversation state
+            state.Search = "";
+            state.Searching = "no";
+            await _accessors.ConversationState.SaveChangesAsync(stepContext.Context);
+
+            return await stepContext.EndDialogAsync();
+        }
+```
+
+Before we perform the steps to clear out the state and end the dialog, we want to accomplish the following (add this code to `SearchBingAsync` in order):
+1. Get the PictureState.
+```csharp
+            // Add state so we can update it throughout the turn
+            var state = await _accessors.PictureState.GetAsync(stepContext.Context);
+```
+2. Store `state.Search` in a local variable, `searchText` so we know what the user is searching for.
+```csharp
+            var searchText = state.Search;
+``` 
+3. Store the user's answer to the ChoicePrompt in a variable `searchbing`.
+```csharp
+            var searchbing = (string)stepContext.Result;
+```
+4. Based on the user's answer, potentially wait for the results from Bing.
+```csharp
+            switch (searchbing)
+            {
+                case "Yes":
+                    await SearchResponses.ReplyWithBingConfirmation(stepContext.Context, searchText);
+                    // add Bing Search
+                    await SearchBing(stepContext.Context, searchText);
+                    break;
+                case "No":
+                    // End the dialog and wait for a response
+                    await SearchResponses.ReplyWithDontBing(stepContext.Context);
+                    break;
+                default:
+                    await MainResponses.ReplyWithConfused(stepContext.Context);
+                    await MainResponses.ReplyWithHelp(stepContext.Context);
+                    break;
+            }
+```
+5. Only now can we clear out the state and end the dialog.  
+
+At this point, you should have only one error, around `SearchBing`, because you haven't created it yet. The goal of `SearchBing` is to make the call out to the Bing Image Search API and return the results. We'll do that next.
+
+### Lab 2.4 Calling the Bing Image Search API
+
+You've now got everything ready for Bing Image Search. The only thing that's left is to actually make the call and return the results in a message to the user.  
+
+The first step is to add the `Microsoft.Azure.CognitiveServices.Search.ImageSearch` NuGet package to your project. Do that now.  
+
+Since you'll only call Bing from within "PictureBot.cs", you'll only need to add the following `using` statements to that file:
 ```csharp
 using Microsoft.Azure.CognitiveServices.Search.ImageSearch;
 using Microsoft.Azure.CognitiveServices.Search.ImageSearch.Models;
 ```
-More errors? Can you fix it? Have you installed the NuGet package for ImageSearch?  
-
-Once you've fixed the errors, the next thing is to try to call the Bing Service and store the results. If there is an error, throw an exception. Add the following:
+Next, below the task `BingSearchAsync`, create a new task with the following shell:
 ```csharp
+        // Add SearchBing
+        public async Task SearchBing(ITurnContext context, string searchText)
+        {
+            // Step 1: Call the Bing Image Search API
+
+            // Step 2: Process the results and send to the user
+
+        }
+```
+You can see there are two steps to sending the results from Bing to the user: calling the API and processing the results.
+
+#### Step 1: Call the Bing Image Search API
+
+In order to call the Cognitive Services APIs, there are a few things you have to do, regardless of which API. You need to:
+1. Provide a key to the service.
+2. Initialize the client for said service with your key.
+3. Create a location to store the results.
+4. Call the API and store the results in predetermined location.  
+
+Review the follow code to confirm you understand the steps, then add the code below `// Step 1: Call the Bing Image Search API`.
+```csharp
+            //IMPORTANT: replace this variable with your Cognitive Services subscription key.
+            string subscriptionKey = "YourBingKey";
+            //initialize the client
+            var client = new ImageSearchAPI(new ApiKeyServiceClientCredentials(subscriptionKey));
             //images to be returned by the Bing Image Search API
             Images imageResults = null;
             try
@@ -127,12 +204,17 @@ Once you've fixed the errors, the next thing is to try to call the Bing Service 
             catch (Exception ex)
             {
                 // If there's an exception, return the error in the chat window
-                await context.SendActivity("Encountered exception. " + ex.Message);
+                await context.SendActivityAsync("Encountered exception. " + ex.Message);
             }
-``` 
-Review the code so far in the SearchBing task and confirm you understand what is happening.  
+```
+Don't forget to replace "YourBingKey" with your Bing key!  
 
-Now that you have received the results from Bing, you need to parse out the top five images and put them into an attachment. For this lab, you'll use a simple media attachment, but there are [other options](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=csharp)). Add and review the following code:
+#### Step 2: Process the results and send to the user
+
+This next block of code should remind you of when you called the Azure Search service and processed the results. Instead of using our models and creating a carousel of Hero cards, we're going to explore another method - simple attachments. [Spend a few minutes reviewing different ways of adding media to messages](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=csharp).  
+
+After reviewing the above reference, the implementation should be straightforward. If we get results from the service, let's grab the first five image results and store them in `activity` using `MessageFactory.Attachment()`. Then, let's tell the user here are the top five results for what they searched for and send the `activity` attachment. Review the code and then add it below `// Step 2: Process the results and send to the user`.
+
 ```csharp
             // If the API returns images
             if (imageResults != null)
@@ -149,37 +231,17 @@ Now that you have received the results from Bing, you need to parse out the top 
                 });
                 // Send the activity to the user.
                 await SearchResponses.ReplyWithBingResults(context, searchText);
-                await context.SendActivity(activity);
+                await context.SendActivityAsync(activity);
             }
             else // If the API doesn't return any images
             {
                 await SearchResponses.ReplyWithNoResults(context, searchText);
             }
 ```
-The only thing missing is addressing that comment that we left unfinished earlier:
-```csharp
-                    // Build a case statement to search Bing if they said Yes
-                    // and end the dialog if they say No
 
-```
-Add the needed code, run the bot, and test in the emulator. Your result should be something like this:
+You're now ready to run the bot. Test it in the 'development' endpoint in the Emulator to confirm it is working as expected. Then, by applying what you learned in the previous labs, re-publish the bot to your existing service, and test it in the 'production' endpoint. You should now also be able to interact with your enhanced bot in the portal via WebChat.
 
-![Sample Bing Search for Dogs](./resources/assets/dogs.png)  
-
->Here are some hints:  
-> * This will be similar in structure to how you switched between topics in the RootDialog (in PictureBot.cs)
-> * Start with the structure, and fill in the yes, no, and default with comments of what you think should happen for each case. Then, try to fill it in with the responses and tasks you've created in earlier parts of the lab
-> * If you get stuck, you can always check the solution file under **resources > code**.
-
-## Lab 2.4: (optional) Republish your bot
-
-After you're happy with your bot, you can republish it.  
-
-Make sure the bot is stopped. Right click on the project "PictureBot" and select Publish, just as if you were going to publish the bot for the first time. Your publish profile should be there, and you can simply select "Publish" again.  
-
-Now, you should be able to interact with your enhanced bot in WebChat.
-
-## More resources for Bing Search APIs:
+### More resources for Bing Search APIs:
 - [Bing Search .NET Samples](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/BingSearchv7)
 - [Bing Web Search app Tutorial](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/tutorial-bing-web-search-single-page-app)
 - [ConferenceBuddy bot application that uses Bing Search and other Cognitive Services](https://github.com/Azure/ConferenceBuddy)
