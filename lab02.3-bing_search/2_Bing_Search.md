@@ -109,7 +109,7 @@ Open "PictureBot.cs" and locate where you created `SearchBingAsync`. It should l
 ```csharp
         private async Task<DialogTurnResult> SearchBingAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            // Clear out Search or future searches, set the searching state to no,
+            // Clear out Search for future searches, set the searching state to no,
             // update the conversation state
             state.Search = "";
             state.Searching = "no";
@@ -119,7 +119,7 @@ Open "PictureBot.cs" and locate where you created `SearchBingAsync`. It should l
         }
 ```
 
-Before we perform the steps to clear out the state and end the dialog, we want to accomplish the following (add this code to `SearchBingAsync` in order):
+Before we perform the steps to clear out the state and end the dialog (what the code currently in `SearchBingAsync` does), we need to get the state, find out what they want to search for, and if they told us to search Bing, call Bing and return the results. In `SearchBingAsync`, we want to accomplish the following four steps before updating the state and ending the dialog, which is step five. Add this code to `SearchBingAsync` in order **above** the line `// Clear out Search for future searches, set the searching state to no,`:
 1. Get the PictureState.
 ```csharp
             // Add state so we can update it throughout the turn
@@ -152,7 +152,7 @@ Before we perform the steps to clear out the state and end the dialog, we want t
                     break;
             }
 ```
-5. Only now can we clear out the state and end the dialog.  
+5. Only now can we update the state and end the dialog, which is what your starter code did. So there is no action from you for this step, except to confirm that at the end of `SearchBingAsync`, your code updates the conversation state and ends the dialog.  
 
 At this point, you should have only one error, around `SearchBing`, because you haven't created it yet. The goal of `SearchBing` is to make the call out to the Bing Image Search API and return the results. We'll do that next.
 
@@ -167,7 +167,7 @@ Since you'll only call Bing from within "PictureBot.cs", you'll only need to add
 using Microsoft.Azure.CognitiveServices.Search.ImageSearch;
 using Microsoft.Azure.CognitiveServices.Search.ImageSearch.Models;
 ```
-Next, below the task `BingSearchAsync`, create a new task with the following shell:
+Next, below the task `SearchBingAsync`, create a new task with the following shell:
 ```csharp
         // Add SearchBing
         public async Task SearchBing(ITurnContext context, string searchText)

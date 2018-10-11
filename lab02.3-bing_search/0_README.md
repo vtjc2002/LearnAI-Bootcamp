@@ -41,7 +41,7 @@ There are several directories in the [resources](./resources) folder:
 You should already have a list of keys, we'll just be adding one more for this lab. We recommend storing the new keys in the same text file you created earlier.
 
 >_Keys_
->- Bing Image Search key: 
+>- Bing Search V7 key: 
 
 
 ### Continue to [1_Overview](./1_Overview.md)
