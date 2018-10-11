@@ -241,6 +241,13 @@ After reviewing the above reference, the implementation should be straightforwar
 
 You're now ready to run the bot. Test it in the 'development' endpoint in the Emulator to confirm it is working as expected. Then, by applying what you learned in the previous labs, re-publish the bot to your existing service, and test it in the 'production' endpoint. You should now also be able to interact with your enhanced bot in the portal via WebChat.
 
+**Looking for a Challenge?**  
+
+This bot allows you to search for pictures, and, in theory, share them with other people. In the real world, there are different license types for images, depending on what your intended usage is. Can you configure PictureBot to only return images from Bing of license type "Public" so the legal department doesn't come after you?  
+
+These resources may help: [Resource 1](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#license) and [Resource 2](http://help.bing.microsoft.com/#apex/18/en-us/10006/0)
+
+
 ### More resources for Bing Search APIs:
 - [Bing Search .NET Samples](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/BingSearchv7)
 - [Bing Web Search app Tutorial](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/tutorial-bing-web-search-single-page-app)
