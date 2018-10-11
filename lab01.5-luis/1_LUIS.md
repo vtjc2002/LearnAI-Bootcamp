@@ -105,16 +105,16 @@ Finally, you need to add some sample utterances to the "None" intent. This helps
 
 We are now ready to train our model.  Click "Train" in the top right bar.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
 
-Then click on "Publish" in the top bar.  You have several options when you publish your app, including enabling [including all predicted intent scores, Bing spell checker, speech priming, and sentiment analysis](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp). 
+Next, click on "Manage" in the top bar. You'll have several options on the left side of the window (Application Information, Keys and Endpoints, Publish Settings, Versions, Collaborators). You can read more about the various publish options [here](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp).
 
-If you have not already done so, select or add (by clicking the "Add Key" button towards the bottom of the page) the endpoint key that you set up earlier, or follow the link to add a key from your Azure account 
+If you have not already done so, select or add (by clicking the "Add Key" button towards the bottom of the page on the "Keys and Endpoints" tab) the endpoint key that you set up earlier, or follow the link to add a key from your Azure account 
 (for testing and learning purposes, you can also just use the "Starter_Key"
-). You can leave the endpoint slot as "Production".  Then click "Publish".  
+). You can leave the endpoint slot as "Production".  Then click "Publish" in the top bar. You'll have the option to publish to your "Production" or "Staging" endpoint. Select "Production", and [read about the reasons for the two endpoints](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-version). Finally, click "Publish".  
 
 
 
 ![Publish LUIS App](./resources/assets/LuisPublish.png)  
-![AddKey](./resources/assets/LuisPublish2.png)  
+
 
 Publishing creates an endpoint to call the LUIS model.  The URL will be displayed, which will be explained in a later lab. For now, you can copy the Endpoint URL and add it to your list of keys.  
 
@@ -130,7 +130,7 @@ Now I need to retrain my app by selecting the Train button. I then tested the sa
 ![Reassign Intent](./resources/assets/ReassignIntentAfter.png) 
 
 
-You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the Endpoint URL. To open this URL in your browser, set the URL parameter `&q` to your test query. For example, append `&q=Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
+You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the Endpoint URL. To open this URL in your browser, set the URL parameter `&q=` to your test query. For example, append `Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
 
 
 
