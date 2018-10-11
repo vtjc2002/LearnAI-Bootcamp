@@ -61,7 +61,9 @@ Start by right-clicking on the Solution and selecting "Build". This will load up
 
 Next, we'll focus on the NuGet packages we need. Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution."  
 
+
 **Do not update Microsoft.AspNetCore.All or Microsoft.AspNetCore**.  
+
 
 In the "Updates" tab, update the following packages **in order** to `4.0.7`:
 * Microsoft.Bot.Configuration
@@ -102,6 +104,7 @@ After you've installed them, under **Dependencies > NuGet** in your Solution Exp
 
 
 As you probably know, renaming a Visual Studio Solution/Project is a very sensitive task. **Carefully** complete the following tasks so all the names reflect PictureBot instead of EchoBot:
+> Note: Renaming files in Visual Studio can take up to 15 seconds while all the references are being resolved. If time is not given for this to occur, the build will fail which may require you to manually resolve the refactored objects. Have patience.
 1. Rename the solution then project from "EchoBotWithCounter" to "PictureBot". Close and reopen Visual Studio.
 2. Open Program.cs, highlight "BotBuilderSamples" and right-click to select "Rename". Check the boxes to rename all occurrences in strings and comments. Rename it to PictureBot and select "Apply".
 2. Open Properties > launchSettings.json and replace "EchoBotWithCounter" to "PictureBot".
@@ -206,6 +209,8 @@ Focus your attention on the `ConfigureServices` method which is used to add serv
 
 Fortunately, this shell is pretty comprehensive, so we only have to add two items: middleware and custom state accessors.  
 
+#### Middleware 
+
 Middleware is simply a class or set of classes that sit between the adapter and your bot logic, added to your adapter's middleware collection during initialization. The SDK allows you to write your own middleware or add reusable components of middleware created by others. Every activity coming in or out of your bot flows through your middleware. We'll get deeper into this later in the lab, but for now, it's important to understand that every activity flows through your middleware, because it is located in the `ConfigureServices` method that gets called at run time (which runs in between every message being sent by a user and OnTurnAsync). Add the following code on the line following `options.State.Add(conversationState);`:
 ```csharp
 
@@ -216,8 +221,13 @@ Middleware is simply a class or set of classes that sit between the adapter and 
 ```  
 
 
+#### Custom state accessors
 
-Next, we have to update our custom state accessors which we'll use to keep track of a few things:
+Before we talk about the custom sate accessors that we need, it's important to back up. Dialogs, which we'll really get into in the next section, are an approach to implementing multi-turn conversation logic, which means they'll need to rely on a persisted state to know where in the conversation the users are. In our dialog-based bot, we'll use a DialogSet to hold the various dialogs. The DialogSet is created with a handle to an object called an "accessor".  
+
+In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which basically means it provides the ability to get, set, and delete information regarding state, so we can keep track of which step a user is in a conversation.
+
+For each accessor we create, we have to first give it a property name. For our scenario, we want to keep track of a few things:  
 
 1. `PictureState`
     * Have we greeted the user yet?
@@ -228,7 +238,7 @@ Next, we have to update our custom state accessors which we'll use to keep track
     * Is the user currently in the middle of a dialog?
         * This is what we'll use to determine where a user is in a given dialog or conversation flow. If you aren't familiar with dialogs, don't worry, we'll get to that soon.
 
-You can see in the code below EchoBot had a counter to keep track of the number of turns in a conversation:
+You can see in the code below, the EchoBot template (the template we started from) had a custom state accessor that acted as a counter to keep track of the number of turns in a conversation (or "CounterState"):
 
 ```csharp
                 // Create the custom state accessor.
@@ -247,7 +257,14 @@ Finally, to keep track of the dialogs, you'll use the built in `DialogState`, by
                     DialogStateAccessor = conversationState.CreateProperty<DialogState>("DialogState"),
 ```
 
-You should see an error (red squiggly) beneath some of the terms. You've said you're going to store this information, but you haven't yet specified where or how. We have to update "PictureState.cs" and "PictureBotAccessor.cs" to have and access the information we want to store.   
+You should see an error (red squiggly) beneath some of the terms. But before fixing them, you may be wondering why we had to create two accessors, why wasn't one enough?  
+
+* `DialogState` is a specific accessor that comes from the `Microsoft.Bot.Builder.Dialogs` library. When a message is sent, the Dialog subsystem will call `CreateContext` on the `DialogSet`. Keeping track of this context requires the `DialogState` accessor specifically to get the appropriate dialog state JSON.  
+* On the other hand, `PictureState` will be used to track particular conversation properties that we specify throughout the conversation (e.g. Have we greeted the user yet?)
+
+> Don't worry about the dialog jargon yet, but the process should make sense. If you're confused, you can [dive deeper into how state works](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-dialog-state?view=azure-bot-service-4.0).
+
+Now back to the errors you're seeing. You've said you're going to store this information, but you haven't yet specified where or how. We have to update "PictureState.cs" and "PictureBotAccessor.cs" to have and access the information we want to store.   
 
 Navigate to "PictureState.cs". This is where we'll store information about the active conversation. You'll notice that we have an integer that we're storing called `TurnCount`. Can you guess what this was for in EchoBotWithCounter?  
 
@@ -524,7 +541,7 @@ At this point, your Solution Explorer should look similar to the following image
 
 ![Solution Folder view for Bot](./resources/assets/solutionExplorer.png) 
 
-Are you missing anything? Now's a good time to check.
+Are you missing anything? Now's a good time to check that you have all of the files, but you can ignore any other errors (for now).
 
 
 ### Lab 1.5: Regex and Middleware

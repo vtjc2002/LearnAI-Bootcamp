@@ -136,6 +136,10 @@ Press F5 to run your bot again.  In the Bot Emulator, try searching for somethin
 
 You might notice that if you run the bot, and immediately try to search for pictures, you are greeted instead. Why is that? Hint: review the `MainDialog` tasks in PictureBot.cs.
 
+You might also notice that if you run the bot, greet the bot, and then submit "dogs", you get the `ReplyWithConfused` result. Why is that? What is the state after you've been greeted and before you submit "dogs"? Your code isn't (necessarily) wrong, you're just not triggering the flow as you set it up. Review your dialog set and what makes you move from one dialog to the next. Ask a neighbor if you get stuck.  
+
+If you struggled with either (or both) of the above comments, you probably are feeling that this bot is not very smart. It's not understanding what you're trying to do, even though (you feel like) you're being clear. In the next lab, we'll address this frustration, so it is valuable for you to experience it.
+
 Get stuck? You can find the solution for this lab under **resources > code**. We recommend using this as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys. The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.   
 
 ### Continue to [3_LUIS](./3_LUIS.md)  
