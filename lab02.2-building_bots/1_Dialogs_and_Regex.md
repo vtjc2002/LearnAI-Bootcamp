@@ -223,7 +223,7 @@ Middleware is simply a class or set of classes that sit between the adapter and 
 
 #### Custom state accessors
 
-Before we talk about the custom sate accessors that we need, it's important to back up. Dialogs, which we'll really get into in the next section, are an approach to implementing multi-turn conversation logic, which means they'll need to rely on a persisted state to know where in the conversation the users are. In our dialog-based bot, we'll use a DialogSet to hold the various dialogs. The DialogSet is created with a handle to an object called an "accessor".  
+Before we talk about the custom state accessors that we need, it's important to back up. Dialogs, which we'll really get into in the next section, are an approach to implementing multi-turn conversation logic, which means they'll need to rely on a persisted state to know where in the conversation the users are. In our dialog-based bot, we'll use a DialogSet to hold the various dialogs. The DialogSet is created with a handle to an object called an "accessor".  
 
 In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which basically means it provides the ability to get, set, and delete information regarding state, so we can keep track of which step a user is in a conversation.
 
@@ -252,7 +252,7 @@ You can see in the code below, the EchoBot template (the template we started fro
 ```
 We won't count turns, but we can use a similar construct to keep track of what we'll call `PictureState`. Using the same naming conventions as `CounterState`, add `PictureState` within the list of custom state accessors.
 
-Finally, to keep track of the dialogs, you'll use the built in `DialogState`, by adding the following line to your list of custom state accessors:
+Finally, to keep track of the dialogs, you'll use the built-in `DialogState`, by adding the following line to your list of custom state accessors:
 ```csharp
                     DialogStateAccessor = conversationState.CreateProperty<DialogState>("DialogState"),
 ```
