@@ -37,7 +37,7 @@ The Bing Search APIs fall into the "search" category of [Azure Cognitive Service
 * [Bing Visual Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/overview): Returns insights about an image such as visually similar images, shopping sources for products found in the image, and related searches. Here's a [blog post](https://azure.microsoft.com/en-us/blog/bing-visual-search-and-entity-search-apis-for-video-apps/) and [video](https://www.youtube.com/watch?time_continue=1&v=fj1BX2INbZE) to learn more.
 * [Bing Custom Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-custom-search/overview): Specify the domains, subsites, and webpages that Bing searches, customizing search experiences for different topics  
 
-Take a few minutes to explore some the capabilities of the various service (each link should take you to more information about the service). Discuss with your neighbor at least one things you learned that the Bing Search APIs can do that you did not know.  
+Take a few minutes to explore some the capabilities of the various service (each link should take you to more information about the service). Discuss with your neighbor at least one thing you learned that the Bing Search APIs can do that you did not know.  
 
 
 #### Lab options  
