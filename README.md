@@ -2,7 +2,7 @@
 
 The goal of this two day bootcamp is to provide a kick-start to individuals who need to develop deeper proficiency with the range of the Microsoft Cloud AI platform. These days are not "Getting Started with..." the various services and assume a 100-200-level familiarity with the products prior to getting started.
 
-The structure of both days is intended to be hands-on. Each lab should be able to be run in relative isolation, so as long as **appropriate pre-requisites are met**, an individual should be able to complete a given lab without needing to complete the others.
+The structure of both days is intended to be hands-on. Each lab should be able to be run in relative isolation, so as long as **appropriate prerequisites are met**, an individual should be able to complete a given lab without needing to complete the others.
 
 ## Emerging AI Developers
 
