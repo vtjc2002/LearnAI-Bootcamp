@@ -37,31 +37,56 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 
 namespace CustomVision.Sample
 {
     class Program
     {
-        private static List<MemoryStream> MbikesImages;
+        private static List<MemoryStream> hemlockImages;
 
-        private static List<MemoryStream> RbikesImages;
+        private static List<MemoryStream> japaneseCherryImages;
 
         private static MemoryStream testImage;
 
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            
+            // Add your training and prediction key from the settings page of the portal 
+            string trainingKey = "<add your training key here>";
+            string predictionKey = "<add your prediction key here>";
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+            // Create the Api, passing in the training key
 
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
+
+            
 
         }
 
+        
 
- 
+
+    }
+
+    internal class PredictionEndpointCredentials
+    {
+        private string predictionKey;
+
+        public PredictionEndpointCredentials(string predictionKey)
+        {
+            this.predictionKey = predictionKey;
+        }
+    }
+
+    internal class TrainingApiCredentials
+    {
+        private string trainingKey;
+
+        public TrainingApiCredentials(string trainingKey)
+        {
+            this.trainingKey = trainingKey;
+        }
     }
 }

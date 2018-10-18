@@ -57,12 +57,7 @@ located:
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This code calls two helper methods which we will define below. The method called
-`GetTrainingKey` prepares the training key. The one called `LoadImagesFromDisk`
-loads two sets of images that this example uses to train the project, and one
-test image that the example loads to demonstrate the use of the default
-prediction endpoint. On opening the project the following code should be
-displayed from line 35:
+At the bottom of the Progam.cs file are  methods called `TrainingApiCredentials` and `PredictionEndpointCredentials` which instantiates the training and prediction key respectively. Finally, there is one called `LoadImagesFromDisk` that loads two sets of images that this used to train the project, and one that performs the prediction test with a test image using the default prediction endpoint. On opening the project the following code should be displayed from line 35:
 
  
 
@@ -72,57 +67,66 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 
 namespace CustomVision.Sample
 {
     class Program
     {
-        private static List<MemoryStream> MbikesImages;
+        private static List<MemoryStream> hemlockImages;
 
-        private static List<MemoryStream> RbikesImages;
+        private static List<MemoryStream> japaneseCherryImages;
 
         private static MemoryStream testImage;
 
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            
+            // Add your training and prediction key from the settings page of the portal 
+            string trainingKey = "<add your training key here>";
+            string predictionKey = "<add your prediction key here>";
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+            // Create the Api, passing in the training key
 
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
+
+            
 
         }
 
+        
 
+
+    }
+
+    internal class PredictionEndpointCredentials
+    {
+        private string predictionKey;
+
+        public PredictionEndpointCredentials(string predictionKey)
+        {
+            this.predictionKey = predictionKey;
+        }
+    }
+
+    internal class TrainingApiCredentials
+    {
+        private string trainingKey;
+
+        public TrainingApiCredentials(string trainingKey)
+        {
+            this.trainingKey = trainingKey;
+        }
     }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Step 2: Add code to validate and manage the training key
+### Step 2: Add the training and prediction key to the project.
 
-Create a method `GetTrainingKey()` with two parameters of `trainingKey` 
-with a data type of string, and a second parameter of args with the data type
-of string, using the value from the trainingkey variable.
-The code can include control of flow logic to either use the key if it is already
-defined, or to prompt for the key should it be missing. Create the
-following code at the bottom of the cs file, underneath the } that is third from
-the bottom of the file.
+Add your training and prediction key from the customvision.ai website to the two variable `trainingKey` and `predictionKey` respectively.
 
-### Step 3: Add code to validate and manage the prediction key
-
-On Line 147, create a method `GetPredictionKey` with two parameters of `predictionKey` 
-with a data type of string, and a second parameter of args with the data type
-of string, using the value from the predictionkey variable.
-The code can include control of flow logic to either use the key if it already
-defined, or to prompt for the key should it be missing. Add the
-following code at the bottom of the cs file, underneath the code you have just added
-for the training key in step 2.
-  
-
-### Step 4: Create code that will upload images from the local disk
+### Step 3: Create code that will upload images from the local disk
 
 Create a method named `LoadImagesFromDisk()` that creates two variables named
 `MbikesImages` and `RbikesImages`. Each of thes variables should use the `GetFiles()`
@@ -133,13 +137,13 @@ from the Images\test folder of your Github location. Create code underneath the
 code created in step 2
 
 
-### Step 5: Create a Custom Vision Service project
+### Step 4: Create a Custom Vision Service project
 
 Create a new Custom Vision Service project named "Bike Type", create the
 code in the body of the `Main()` method after the call to `new TrainingApi().`
 
 
-### Step 6: Add tags to your project
+### Step 5: Add tags to your project
 
 Create two variable named `MbikesTag` and `RbikesTag` that call the `CreateTag`
 method of the class `trainingAPI` for the current project. The MbikesTag 
@@ -148,17 +152,17 @@ to "Racing". To add tags to your project, create the code after the call to
 `CreateProject("Bike Type");`.
 
 
-### Step 7: Upload images to the project
+### Step 6: Upload images to the project
 
 To add the images we have in memory to the project, call the `LoadImagesFromDisk()`
-that either uploads images one at a time, or as a batch. The variables `MbikesImages`
+that uploads images one at a time. The variables `MbikesImages`
 and `RbikesImages` should be used as the source of the image upload to the project.
 The variables `MbikesTag` and `RbikesTag` can be used to associate the tags to the images
 using the `CreateImagesFromData` method from the `trainingApi` class.
 Add the code after the call to `CreateTag(project.Id, "Racing")` method.
 
 
-### Step 8: Train the project
+### Step 7: Train the project
 
 Use the `TrainProject` method of the `trainingApi` class against the current projectid
 to start the training of the images. Use a while clause with the Status method of 
@@ -168,20 +172,14 @@ and set it as default within the project using the `UpdateIteration` method of t
 `trainingApi` class. Insert your code after the end of code that you added in the prior step. 
 
 
-### Step 9: Create a variable named predictionKey that holds the prediction key value
-
-Create a variable named `predictionKey` thats calls the method `GetPredictionKey` and passes
-two parameters of a string literal `"<your key here>"`, and a second parameter of `args` 
-with the data type of string.
-
-### Step 10: Use the default prediction endpoint
+### Step 8: Use the default prediction endpoint
 
 We are now ready to use the model for prediction. First we obtain the endpoint
 associated with the default iteration. Then we send a test image to the project
 using that endpoint. Insert the code after the training code you have just
 entered.
 
-### Step 11: Run the example
+### Step 9: Run the example
 
 Build and run the solution. You will be required to input your training API key
 into the console app when running the solution so have this at the ready. The

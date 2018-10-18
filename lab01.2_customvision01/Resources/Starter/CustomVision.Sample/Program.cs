@@ -37,7 +37,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 
 namespace CustomVision.Sample
 {
@@ -51,55 +52,19 @@ namespace CustomVision.Sample
 
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            // Add your training and prediction key from the settings page of the portal 
+            string trainingKey = "<add your training key here>";
+            string predictionKey = "<add your prediction key here>";
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+            // <add your prediction key here>
+            // Create the Api, passing in the training key
+
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
+
+            
 
 
-        }
 
-
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
-
-        private static string GetPredictionKey(string predictionKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    predictionKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
-                {
-                    Console.Write("Enter your prediction key: ");
-                    predictionKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return predictionKey;
         }
 
         private static void LoadImagesFromDisk()
@@ -109,6 +74,26 @@ namespace CustomVision.Sample
             japaneseCherryImages = Directory.GetFiles(@"..\..\..\..\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
             testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\Test\test_image.jpg"));
 
+        }
+    }
+
+    internal class PredictionEndpointCredentials
+    {
+        private string predictionKey;
+
+        public PredictionEndpointCredentials(string predictionKey)
+        {
+            this.predictionKey = predictionKey;
+        }
+    }
+
+    internal class TrainingApiCredentials
+    {
+        private string trainingKey;
+
+        public TrainingApiCredentials(string trainingKey)
+        {
+            this.trainingKey = trainingKey;
         }
     }
 }

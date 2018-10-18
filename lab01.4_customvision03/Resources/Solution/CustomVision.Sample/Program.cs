@@ -37,49 +37,55 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 
 namespace CustomVision.Sample
 {
     class Program
     {
-        private static List<MemoryStream> MbikesImages;
+        private static List<MemoryStream> hemlockImages;
 
-        private static List<MemoryStream> RbikesImages;
+        private static List<MemoryStream> japaneseCherryImages;
 
         private static MemoryStream testImage;
 
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            
+            // Add your training and prediction key from the settings page of the portal 
+            string trainingKey = "<add your training key here>";
+            string predictionKey = "<add your prediction key here>";
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+            // <add your prediction key here>
+            // Create the Api, passing in the training key
+
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
 
             // Create a new project  
             Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("Bike Type");
+            var project = trainingApi.CreateProject("My First Project");
 
-            // Make two tags in the new project  
-            var MbikesTag = trainingApi.CreateTag(project.Id, "Mountain");
-            var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");
+            // Make two tags in the new project
+            var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");
+            var japaneseCherryTag = trainingApi.CreateTag(project.Id, "Japanese Cherry");
 
             // Add some images to the tags  
             Console.WriteLine("\\tUploading images");
             LoadImagesFromDisk();
 
-            // Images can be uploaded one at a time  
-            foreach (var image in MbikesImages)
+            // Images are then uploaded  
+            foreach (var image in hemlockImages)
             {
-                trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { MbikesTag.Id.ToString() });
+                trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { hemlockTag.Id.ToString() });
             }
 
-            // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, RbikesImages, new List< Guid> () { RbikesTag.Id });
+            foreach (var image in japaneseCherryImages)
+            {
+                trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { japaneseCherryTag.Id.ToString() });
+            }
 
-            // Now there are images with tags start training the project
+            // Now there are images with tags start training the project  
             Console.WriteLine("\\tTraining");
             var iteration = trainingApi.TrainProject(project.Id);
 
@@ -95,18 +101,11 @@ namespace CustomVision.Sample
             // The iteration is now trained. Make it the default project endpoint  
             iteration.IsDefault = true;
             trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
-            Console.WriteLine("Done!\\n");
+            Console.WriteLine("Done!\n");
 
             // Now there is a trained endpoint, it can be used to make a prediction  
-
-            // Add your prediction key from the settings page of the portal 
-            // The prediction key is used in place of the training key when making predictions 
-            string predictionKey = GetPredictionKey("<your key here>", args);
-
-            // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
-            PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
-            PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
+            PredictionEndpoint endpoint = new PredictionEndpoint() { ApiKey = predictionKey };
+            
             // Make a prediction against the new project  
             Console.WriteLine("Making a prediction:");
             var result = endpoint.PredictImage(project.Id, testImage);
@@ -114,63 +113,39 @@ namespace CustomVision.Sample
             // Loop over each prediction and write out the results  
             foreach (var c in result.Predictions)
             {
-                Console.WriteLine($"\\t{c.Tag}: {c.Probability:P1}");
+                Console.WriteLine($"\t{c.TagName}: {c.Probability:P1}");
             }
             Console.ReadKey();
 
-
-
-
-        }
-
-
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
-
-        private static string GetPredictionKey(string predictionKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    predictionKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
-                {
-                    Console.Write("Enter your prediction key: ");
-                    predictionKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return predictionKey;
         }
 
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
-            MbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Mountain").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            RbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Racing").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\bike1.jpg"));
+            hemlockImages = Directory.GetFiles(@"..\..\..\..\Images\Hemlock").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            japaneseCherryImages = Directory.GetFiles(@"..\..\..\..\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\Test\test_image.jpg"));
 
+        }
+    }
+
+    internal class PredictionEndpointCredentials
+    {
+        private string predictionKey;
+
+        public PredictionEndpointCredentials(string predictionKey)
+        {
+            this.predictionKey = predictionKey;
+        }
+    }
+
+    internal class TrainingApiCredentials
+    {
+        private string trainingKey;
+
+        public TrainingApiCredentials(string trainingKey)
+        {
+            this.trainingKey = trainingKey;
         }
     }
 }
