@@ -37,7 +37,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 
 namespace CustomVision.Sample
 {
@@ -51,12 +52,13 @@ namespace CustomVision.Sample
 
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            // Add your training and prediction key from the settings page of the portal 
+            string trainingKey = "<add your training key here>";
+            string predictionKey = "<add your prediction key here>";
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+            // Create the Api, passing in the training key
+
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
 
             // Create a new project  
             Console.WriteLine("Creating new project:");
@@ -70,14 +72,16 @@ namespace CustomVision.Sample
             Console.WriteLine("\\tUploading images");
             LoadImagesFromDisk();
 
-            // Images can be uploaded one at a time  
+            // Images are then uploaded  
             foreach (var image in hemlockImages)
             {
                 trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { hemlockTag.Id.ToString() });
             }
 
-            // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, japaneseCherryImages, new List<Guid>() { japaneseCherryTag.Id });
+            foreach (var image in japaneseCherryImages)
+            {
+                trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { japaneseCherryTag.Id.ToString() });
+            }
 
             // Now there are images with tags start training the project  
             Console.WriteLine("\\tTraining");
@@ -98,15 +102,8 @@ namespace CustomVision.Sample
             Console.WriteLine("Done!\n");
 
             // Now there is a trained endpoint, it can be used to make a prediction  
-
-            // Add your prediction key from the settings page of the portal 
-            // The prediction key is used in place of the training key when making predictions 
-            string predictionKey = GetPredictionKey("<your key here>", args);
-
-            // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
-            PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
-            PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
+            PredictionEndpoint endpoint = new PredictionEndpoint() { ApiKey = predictionKey };
+            
             // Make a prediction against the new project  
             Console.WriteLine("Making a prediction:");
             var result = endpoint.PredictImage(project.Id, testImage);
@@ -114,51 +111,10 @@ namespace CustomVision.Sample
             // Loop over each prediction and write out the results  
             foreach (var c in result.Predictions)
             {
-                Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
+                Console.WriteLine($"\t{c.TagName}: {c.Probability:P1}");
             }
             Console.ReadKey();
 
-        }
-
-
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
-
-        private static string GetPredictionKey(string predictionKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    predictionKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
-                {
-                    Console.Write("Enter your prediction key: ");
-                    predictionKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return predictionKey;
         }
 
         private static void LoadImagesFromDisk()
@@ -168,6 +124,26 @@ namespace CustomVision.Sample
             japaneseCherryImages = Directory.GetFiles(@"..\..\..\..\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
             testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\Test\test_image.jpg"));
 
+        }
+    }
+
+    internal class PredictionEndpointCredentials
+    {
+        private string predictionKey;
+
+        public PredictionEndpointCredentials(string predictionKey)
+        {
+            this.predictionKey = predictionKey;
+        }
+    }
+
+    internal class TrainingApiCredentials
+    {
+        private string trainingKey;
+
+        public TrainingApiCredentials(string trainingKey)
+        {
+            this.trainingKey = trainingKey;
         }
     }
 }

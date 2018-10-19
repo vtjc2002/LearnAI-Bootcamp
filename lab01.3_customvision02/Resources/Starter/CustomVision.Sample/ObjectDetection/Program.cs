@@ -1,10 +1,12 @@
-﻿
+﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+
 
 namespace ObjectDetection
 
@@ -19,35 +21,41 @@ namespace ObjectDetection
 
             // Add your training & prediction key from the settings page of the portal
 
+            string trainingKey = "<enter your training key here>";
+            string predictionKey = "<enter your prediction key here>";
+
 
             // Create the Api, passing in the training key
 
             TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
 
+
             // Find the object detection domain
 
-
+            var domains = trainingApi.GetDomains();
             var objDetectionDomain = domains.FirstOrDefault(d => d.Type == "ObjectDetection");
 
+
             // Create a new project
+
+            Console.WriteLine("Creating new project:");
+            var project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
 
 
             // Make two tags in the new project
 
             var forkTag = trainingApi.CreateTag(project.Id, "fork");
-
+            var scissorsTag = trainingApi.CreateTag(project.Id, "scissors");
 
             Dictionary<string, double[]> fileToRegionMap = new Dictionary<string, double[]>()
-
             {
-                
                 
                 // A bounding box is specified in normalized coordinates using pixels of the object in the image.
                 //  Normalized Left = Left / Width (in Pixels)
                 //  Normalized Top = Top / Height (in Pixels)
                 //  Normalized Bounding Box Width = (Right - Left) / Width (in Pixels)
                 //  Normalized Bounding Box Height = (Bottom - Top) / Height (in Pixels)
-                // FileName, Left, Top, Width, Height// FileName, Left, Top, Width, Height
+                // FileName, Left, Top, Width, Height
                 {"scissors_1", new double[] { 0.4007353, 0.194068655, 0.259803921, 0.6617647 } },
                 {"scissors_2", new double[] { 0.426470578, 0.185898721, 0.172794119, 0.5539216 } },
                 {"scissors_3", new double[] { 0.289215684, 0.259428144, 0.403186262, 0.421568632 } },
@@ -90,6 +98,7 @@ namespace ObjectDetection
                 {"fork_20", new double[] { 0.180147052, 0.239820287, 0.6887255, 0.235294119 } }
             };
 
+
             // Add all images for fork
 
             var imagePath = Path.Combine("Images", "fork");
@@ -106,9 +115,20 @@ namespace ObjectDetection
 
             // Add all images for scissors
 
+            imagePath = Path.Combine("Images", "scissors");
+            imageFileEntries = new List<ImageFileCreateEntry>();
+            foreach (var fileName in Directory.EnumerateFiles(imagePath))
+            {
+                var region = fileToRegionMap[Path.GetFileNameWithoutExtension(fileName)];
+                imageFileEntries.Add(new ImageFileCreateEntry(fileName, File.ReadAllBytes(fileName), null, new List<Region>(new Region[] { new Region(scissorsTag.Id, region[0], region[1], region[2], region[3]) })));
+            }
+
+            trainingApi.CreateImagesFromFiles(project.Id, new ImageFileCreateBatch(imageFileEntries));
 
             // Now there are images with tags start training the project
 
+            Console.WriteLine("\tTraining");
+            var iteration = trainingApi.TrainProject(project.Id);
 
 
             // The returned iteration will be in progress, and can be queried periodically to see when it has completed
@@ -138,6 +158,7 @@ namespace ObjectDetection
             // Make a prediction against the new project
 
             Console.WriteLine("Making a prediction:");
+
             var imageFile = Path.Combine("Images", "test", "test_image.jpg");
             using (var stream = File.OpenRead(imageFile))
 
@@ -146,13 +167,9 @@ namespace ObjectDetection
                 var result = endpoint.PredictImage(project.Id, File.OpenRead(imageFile));
 
                 // Loop over each prediction and write out the results
-
                 foreach (var c in result.Predictions)
-
                 {
-
                     Console.WriteLine($"\t{c.TagName}: {c.Probability:P1} [ {c.BoundingBox.Left}, {c.BoundingBox.Top}, {c.BoundingBox.Width}, {c.BoundingBox.Height} ]");
-
                 }
 
             }
