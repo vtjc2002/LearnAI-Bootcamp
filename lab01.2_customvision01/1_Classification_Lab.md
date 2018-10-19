@@ -9,9 +9,30 @@ In the Resources\Images folder are three folders:
 - Japanese Cherry
 - Test
 
-The Hemlock and Japenese Cherry folders contain images of these types of plants that
+The Hemlock and Japanese Cherry folders contain images of these types of plants that
 will be classified by tagging and training the images. The Test folder contains an image that will be used to 
 perform the test prediction
+
+**Important Note should you recieve a Nuget Package Error**
+-----------------------------------------------------------
+ 
+Long files name can cause Nuget package failures. Should you recieve this error,
+it is recommended that you place the solution files in a folder you have created
+to reduce the number of characters in the filepath. 
+
+If you recieve the following error
+
+>NuGet Package restore failed for project ObjectDetection: 
+>The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
+>and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.		
+
+Peform the following steps
+
+1. Create a folder in the C:\ named Temp
+2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.3_customvision02\Resources\Starter
+3. Copy the CustomVision.Sample folder
+4. Browse to C:\Temp, right click and click Paste
+5. Wait until the copy completes 
 
 ## Step 1: Create a console application and prepare the training key and the images needed for the example.
 
@@ -20,7 +41,7 @@ named **CustomVision.Sample.sln** located in the following sub-directory:
 
 >Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 
-Once opened, ensure that the file `Program.cs` is open. If not, within Solution Explorer double click on `Program.cs`
+Once opened, rebuild the solution. Then, within Solution Explorer, double click on Program.cs to open the file
 
 At the bottom of the Progam.cs file are  methods called `TrainingApiCredentials` and `PredictionEndpointCredentials` which instantiates the training and prediction key respectively. Finally, there is one called `LoadImagesFromDisk` that loads two sets of images that this used to train the project, and one that performs the prediction test with a test image using the default prediction endpoint. On opening the project the following code should be displayed from line 35:
 
@@ -94,8 +115,19 @@ namespace CustomVision.Sample
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+### Step 2: Add your training and prediction key into the Program.cs file. 
 
-## Step 2: Create a Custom Vision Service project
+Under the comment "// Add your training & prediction key from the settings page of the portal" 
+type in the following code to add the training and prediction key to enable access to the 
+Custom Vision services
+ 
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            string trainingKey = "<enter your training key here>";
+>            string predictionKey = "<enter your prediction key here>";
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+
+## Step 3: Create a Custom Vision Service project
 
 To create a new Custom Vision Service project, add the following code in the body of the `Main()` method after the call to `new TrainingApi().`
 
@@ -108,7 +140,7 @@ var project = trainingApi._("My New Project");
 >Q. What method should you replace the _ with to create a new Custom Vision Service project?
 
 
-## Step 3: Add tags to your project
+## Step 4: Add tags to your project
 
 To add tags to your project, insert the following code after the call to
 `("My New Project");`.
@@ -121,7 +153,7 @@ var japaneseCherryTag = trainingApi._(project.Id, "Japanese Cherry");
 
 >Q. What method should you replace the _ with to create a tag for Japanese Cherry?
 
-## Step 4: Upload images to the project
+## Step 5: Upload images to the project
 
 To add the images we have in memory to the project, insert the following code
 after the call to `(project.Id, "Japanese Cherry")` method.
@@ -142,7 +174,7 @@ foreach (var image in japaneseCherryImages)
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Step 5: Train the project
+## Step 6: Train the project
 
 Now that we have added tags and images to the project, we can train it. Insert
 the following code after the end of code that you added in the prior step. This
@@ -171,7 +203,7 @@ trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
 Console.WriteLine("Done!\n");
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Step 6: Get and use the default prediction endpoint
+## Step 7: Get and use the default prediction endpoint
 
 We are now ready to use the model for prediction. First we obtain the endpoint
 associated with the default iteration. Then we send a test image to the project
@@ -193,12 +225,10 @@ foreach (var c in result.Predictions)
 Console.ReadKey();
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Step 7: Run the example
+## Step 8: Run the example
 
-Build and run the solution. You will be required to input your training API key
-into the console app when running the solution so have this at the ready. The
-training and prediction of the images can take 2 minutes. The prediction results
-appear on the console.
+Build and run the solution. The training and prediction of the images can take 2 minutes. 
+The prediction results appear on the console.
 
 ## Need help?
 

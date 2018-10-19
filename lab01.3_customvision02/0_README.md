@@ -11,17 +11,17 @@ Windows using the Custom Vision API.
 **Important Note should you recieve a Nuget Package Error**
 -----------------------------------------------------------
  
-Long files name can cause Nuget package failures. Should you recieve this error,
+Long files name can cause Nuget package failures. Should you receive this error,
 it is recommended that you place the solution files in a folder you have created
 to reduce the number of characters in the filepath. 
 
-If you recieve the following error
+If you receive the following error
 
 >NuGet Package restore failed for project ObjectDetection: 
 >The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
 >and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.		
 
-Peform the following steps
+Perform the following steps
 
 1. Create a folder in the C:\ named Temp
 2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.3_customvision02\Resources\Starter
@@ -42,7 +42,7 @@ Community Edition](https://www.visualstudio.com/downloads/)
 ### The Training API key
 
 You also need to have a training API key. The training API key allows you to
-create, manage, and train Custom Vision projects programatically. All operations
+create, manage, and train Custom Vision projects programmatically. All operations
 on <https://customvision.ai> are exposed through this library, allowing you to
 automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
@@ -73,10 +73,12 @@ Start Visual Studio 2017, Community Edition, open the Visual Studio solution
 named **CustomVision.Sample.sln** from the following location:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-C:\CustomVision.Sample\CustomVision.Sample.sln
+Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Should a "trust" message appear click "Yes".
+
+Once opened, rebuild the solution. Then, within Solution Explorer, double click on Program.cs to open the file
 
 
 The following (incomplete) code is shown. 
@@ -255,7 +257,7 @@ In the second line below, what method will replace the _ to create the project n
 >            var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Replace the _ after "trainingApi." with a method that will display a message in the application that a project is being created?
+Replace the _ after "trainingApi." with a method that will display a message in the application that a project is being created.
 
 
 ### Step 6: Create a tag for the scissor images named scissorsTag
@@ -265,7 +267,7 @@ Under the lines:
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 >           // Make two tags in the new project
 >
->           var forkTag = trainingApi.CreateTag(project.Id, "fork");"
+>           var forkTag = trainingApi.CreateTag(project.Id, "fork");
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Write code that create a variable named scissorsTag that creates a tag named scissors against the current project.
@@ -276,21 +278,20 @@ Write code that create a variable named scissorsTag that creates a tag named sci
 
 Under the line "// Add all images for scissors" add code that will upload the scissors image and assign the images
 to the tag of scissorsTag. Hint. Use the code under "// Add all images for fork" as a template for creating the code
-to upload the scissor images and map them to the scissorsTag
+to upload the scissor images and map them to the scissorsTag.
 
 ### Step 8: train a project named Object Detection Project
 
-Under the line "// Now there are images with tags start training the project", train the project and have the application
-display that the project is being trained.
+Under the line "// Now there are images with tags start training the project", the next step is to train the project and have the application display that the project is being trained.
 
-In the second line below, what method will replace the _ to train the project?
+>Q. In the second line below, what method will replace the _ to train the project?
 
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 >            Console.WriteLine("\tTraining");
 >            var iteration = trainingApi._(project.Id);
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Replace the _ with a method that will display a message in the application that a project is being trained?
+Replace the _ with a method that will display a message in the application that a project is being trained.
 
 ### Step 9: Run the example
 

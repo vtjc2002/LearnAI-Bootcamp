@@ -42,6 +42,27 @@ The Racing and Mountain folders contain images of these types of bikes
 that will be trained and tagged. The Test folder contains an image that will be used 
 to perform the test prediction.
 
+**Important Note should you recieve a Nuget Package Error**
+-----------------------------------------------------------
+ 
+Long files name can cause Nuget package failures. Should you recieve this error,
+it is recommended that you place the solution files in a folder you have created
+to reduce the number of characters in the filepath. 
+
+If you recieve the following error
+
+>NuGet Package restore failed for project ObjectDetection: 
+>The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
+>and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.		
+
+Peform the following steps
+
+1. Create a folder in the C:\ named Temp
+2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.3_customvision02\Resources\Starter
+3. Copy the CustomVision.Sample folder
+4. Browse to C:\Temp, right click and click Paste
+5. Wait until the copy completes 
+
 **Lab: Creating a Custom Vision Application**
 ---------------------------------------------
 
@@ -56,6 +77,8 @@ located:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once opened, rebuild the solution. Then, within Solution Explorer, double click on Program.cs to open the file.
 
 At the bottom of the Progam.cs file are  methods called `TrainingApiCredentials` and `PredictionEndpointCredentials` which instantiates the training and prediction key respectively. Finally, there is one called `LoadImagesFromDisk` that loads two sets of images that this used to train the project, and one that performs the prediction test with a test image using the default prediction endpoint. On opening the project the following code should be displayed from line 35:
 

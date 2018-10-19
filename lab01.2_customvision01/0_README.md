@@ -7,7 +7,7 @@ The Custom Vision Service is an Azure Cognitive Service that lets you build cust
 
 > **Note**  
 > This lab will focus on creating a Custom Vision solution using C#.
-> Want the see a Java solution? watch this video [here](https://channel9.msdn.com/Shows/AI-Show/Azure-Custom-Vision-How-to-Train-and-Identify-Unique-Designs-or-Image-Content), but note that we will not be maintaining the link to this video.   
+> Want the see a Java solution? watch this video [here](https://channel9.msdn.com/Shows/AI-Show/Azure-Custom-Vision-How-to-Train-and-Identify-Unique-Designs-or-Image-Content), but note that we will not be maintaining the link to this video.
  
 
 ## Objectives
@@ -61,7 +61,7 @@ In a previous lab (`lab01.1-computer_vision`), you built a simple C# application
 
 ![Architecture Diagram](./\Resources\Instructor\images/AI_Immersion_Arch.png)
 
-In scenarios wher computer vision does not work, you could easily replace this with another service such as Custom Vision
+In scenarios where computer vision does not work, you could easily replace this with another service such as Custom Vision
 
 > **Note**  
 > For the purpose of the remaining workshop content. The Picturebot application will be built using the Computer Vision service, but hopefully you can appreciate that a wide variety of cognitive services could be used, depending upon your scenario
