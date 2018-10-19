@@ -1,10 +1,9 @@
-# Developing Intelligent Applications with LUIS and Azure Search
+# Building Intelligent Bots with Microsoft's Bot Framework (.NET)
 
 This hands-on lab guides you through creating an intelligent bot from end-to-end using the Microsoft Bot Framework, Azure Search, and Microsoft's Language Understanding Intelligent Service (LUIS). 
 
-> **[08/15/2018] Important Note!**  
-> The v4 SDK for the bot framework recently went [public preview](https://github.com/Microsoft/botbuilder-dotnet). It is unknown exactly when it will go GA. If you would like to complete lab02.2-building_bots with the v3 SDK (instead of the v4 SDK), refer [here](./resources/SDK_V3_Labs).   
-> If you are using these materials as part of a class (i.e. not self-study), **defer to instructor guidance**.  
+> **[09/29/2018] Important Note!**  
+> The v4 SDK for the bot framework recently went [GA](https://github.com/Microsoft/botbuilder-dotnet). If you would like to complete lab02.2-building_bots with the v3 SDK (instead of the v4 SDK), refer [here](./resources/SDK_V3_Labs), but note that we will not be maintaining the V3 labs going forward.   
 > If you are an instructor redelivering this course and have questions, please email learnanalytics@microsoft.com.  
 
 
@@ -37,7 +36,7 @@ Thirdly, you should have experience with the portal and be able to create resour
 
 We're going to build an end-to-end scenario that allows you to pull in your own pictures, use Cognitive Services to find objects and people in the images, figure out how those people are feeling, and store all of that data into a NoSQL Store (CosmosDB). We'll use that NoSQL Store to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
 
-> Note: This lab combines some of the results obtained from various labs (Computer Vision, Azure Search, and LUIS) from earlier in this workshop. If you did not complete the above listed labs, you will need to complete the Azure Search and LUIS lab before moving forwards. Alternatively, you can request to use a neighbor's keys from their Azure Search/LUIS labs.
+> Note: This lab combines some of the results obtained from various labs (Computer Vision, Azure Search, and LUIS) from earlier in this workshop. If you did not complete the above listed labs, you will need to complete the Computer Vision, Azure Search, and LUIS labs before moving forwards. Alternatively, you can request to use a neighbor's keys from their Azure Search/LUIS labs.
 
 ## Architecture
 
@@ -63,8 +62,9 @@ There are several directories in the [resources](./resources) folder:
 	- **FinishedPictureBot-Part1**: The finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can refer to this.
 	- **FinishedPictureBot-Part2**: The finished PictureBot.sln that includes additions for Regex and Search. If you fall behind or get stuck, you can refer to this.
 	- **FinishedPictureBot-Part3**: The finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can refer to this.
-	- **FinishedPictureBot-Part4**: The finished PictureBot.sln including the necessary appsettings.json file to configure your app for publishing. If you fall behind or get stuck, you can refer to this.
 
+> **Note**: If you decide to use a finished solution, you will still need to add the keys to connect to services, and **you will not be able to publish the bot**. We recommend comparing the finished solution to your solution and making adjustments to your solution as needed (as opposed to just opening and running from the finished solutions).  
+  
 > You need Visual Studio to run these labs. If you have already deployed a Windows Data Science Virtual Machine for one of the labs, we recommend using that.
 
 ## Collecting the Keys
@@ -77,8 +77,8 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 >- LUIS URI:
 >- Azure Search Name:
 >- Azure Search Key:
->- Bot Framework App ID:
->- Bot Framework App Password:
+>- botFilePath:
+>- botFileSecret:
 
 
 ## Navigating the Labs
@@ -87,7 +87,7 @@ This workshop has been broken down into five sections:
 - [1_Dialogs_and_Regex](./1_Dialogs_and_Regex.md): Here you will build a bot that uses Regex to act on user input and learn about using dialog containers for organizing bots.
 - [2_Azure_Search](./2_Azure_Search.md): We'll configure our bot for Azure Search and connect it to the Azure Search service from the previous lab.
 - [3_LUIS](./3_LUIS.md): Next, we'll incorporate our LUIS model into our bot, so that we can call LUIS when Regex does not recognize a user's intent.
-- [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by publishing and registering our bot.
+- [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by re-publishing and registering our bot.
 - [5_Closing](./5_Closing.md): Here you'll find a summary of what you've done and where to learn more.
 
 
