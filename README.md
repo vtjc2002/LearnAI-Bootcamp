@@ -1,5 +1,5 @@
 ## LearnAI
-# Cognitive Services Bootcamp
+# Azure Cognitive Services Bootcamp
 Building Intelligent Apps and Agents with the Computer Vision API, Custom Vision Service, LUIS, Bing Search, and Azure Search
 
 ## Welcome 
