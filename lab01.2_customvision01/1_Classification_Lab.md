@@ -13,14 +13,14 @@ The Hemlock and Japanese Cherry folders contain images of these types of plants 
 will be classified by tagging and training the images. The Test folder contains an image that will be used to 
 perform the test prediction
 
-**Important Note should you recieve a Nuget Package Error**
+**Important Note should you receive a Nuget Package Error**
 -----------------------------------------------------------
  
-Long files name can cause Nuget package failures. Should you recieve this error,
+Long files name can cause Nuget package failures. Should you receive this error,
 it is recommended that you place the solution files in a folder you have created
 to reduce the number of characters in the filepath. 
 
-If you recieve the following error
+If you receive the following error
 
 >NuGet Package restore failed for project ObjectDetection: 
 >The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
