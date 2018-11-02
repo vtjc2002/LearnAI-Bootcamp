@@ -83,7 +83,7 @@ Below `await StartAsync(stepContext.Context, searchText);` in the `SearchAsync` 
                 },
                 cancellationToken);
             }
-            else //if (state.Searching == "bing") // This means they just told us if they want to search Bing or not
+            else // This means they just told us if they want to search Bing or not
             {
                 // Go to the next step in the dialog, which is "SearchBingAsync"
                 return await stepContext.NextAsync();
