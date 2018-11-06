@@ -65,17 +65,17 @@ Next, we'll focus on the NuGet packages we need. Right-click on the solution in 
 **Do not update Microsoft.AspNetCore.All or Microsoft.AspNetCore**.  
 
 
-In the "Updates" tab, update the following packages **in order** to `4.0.7`:
+In the "Updates" tab, update the following packages **in order** to `4.1.1`:
 * Microsoft.Bot.Configuration
 * Microsoft.Bot.Schema
 * Microsoft.Bot.Connector
 * Microsoft.Bot.Builder
 * Microsoft.Bot.Builder.Integration.AspNet.Core
-* Microsoft.Bot.Builder.Azure
 
 **Do not update Microsoft.AspNetCore.All or Microsoft.AspNetCore**.   
 
 Next, click the "Browse" tab, and install all of the packages listed below. Make sure you check the box "Include prerelease" and are on the "Browse" tab:  
+* Microsoft.Bot.Builder.Azure
 * Microsoft.Bot.Builder.AI.Luis
 * Microsoft.Bot.Builder.Dialogs
 * Microsoft.Azure.Search
@@ -107,16 +107,17 @@ As you probably know, renaming a Visual Studio Solution/Project is a very sensit
 > Note: Renaming files in Visual Studio can take up to 15 seconds while all the references are being resolved. If time is not given for this to occur, the build will fail which may require you to manually resolve the refactored objects. Have patience.
 1. Rename the solution then project from "EchoBotWithCounter" to "PictureBot". Close and reopen Visual Studio.
 2. Open Program.cs, highlight "BotBuilderSamples" and right-click to select "Rename". Check the boxes to rename all occurrences in strings and comments. Rename it to PictureBot and select "Apply".
-2. Open Properties > launchSettings.json and replace "EchoBotWithCounter" to "PictureBot".
-3. Open wwwroot > default.htm, and replace the occurrences of "Echo bot with counter sample" and "Echo with Counter Bot" with "PictureBot".
-2. Rename "CounterState.cs" to "PictureState.cs"
+3. Open Properties > launchSettings.json and replace "EchoBotWithCounter" to "PictureBot".
+4. Open wwwroot > default.htm, and replace the occurrences of "Echo bot with counter sample" and "Echo with Counter Bot" with "PictureBot".
+5. Rename "CounterState.cs" to "PictureState.cs".
 > Note: Do this by right-clicking on the file and selecting "Rename". You'll get a pop-up similar to the image below. Select "Yes". **Do this for every file you're asked to rename.**
 ![Rename File](./resources/assets/rename.png)
-4. Rename "EchoBotAccessors.cs" to "PictureBotAccessors.cs"
-5. Rename "EchoWithCounterBot.cs" to "PictureBot.cs"
-6. Rename "EchoBotWithCounter.deps.json" to "PictureBot.deps.json"
-7. "EchoBotWithCounter.runtimeconfig.json" to "PictureBot.runtimeconfig.json"
-8. Build the solution.
+6. Open "PictureState.cs" and confirm the class is called "PictureState". If it is not, highlight "CounterState" and right-click to select "Rename". Check the boxes to rename all occurrences in strings and comments. Rename it to PictureState and select "Apply".
+7. Rename "EchoBotAccessors.cs" to "PictureBotAccessors.cs"
+8. Rename "EchoWithCounterBot.cs" to "PictureBot.cs"
+9. Rename "EchoBotWithCounter.deps.json" to "PictureBot.deps.json"
+10. "EchoBotWithCounter.runtimeconfig.json" to "PictureBot.runtimeconfig.json"
+11. Build the solution.
 
 >**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can now add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "lab02.2-bulding_bots," and add all the files of type "MD File." 
 
@@ -315,7 +316,7 @@ For the purposes of this lab, we are going to keep things fairly simple, but aft
 * **MainDialog** - The default dialog the bot starts out with. This dialog will start other dialog(s) as the user requests them. This dialog, as it is the main dialog for the dialog set, will be responsible for creating the dialog container and redirecting users to other dialogs as needed.
 * **SearchDialog** - A dialog which manages processing search requests and returning those results to the user.  
 
-Since we only have two dialogs, we can keep it simple and put them in the PictureBot class. However, complex scenarios may require splitting them out into different dialogs in a folder (similar to how we'll separated Responses and Models).
+Since we only have two dialogs, we can keep it simple and put them in the PictureBot class. However, complex scenarios may require splitting them out into different dialogs in a folder (similar to how we'll separate Responses and Models).
 
 Navigate back to PictureBot.cs and replace your `using` statements with the following:
 ```csharp

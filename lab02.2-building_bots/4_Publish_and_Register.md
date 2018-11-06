@@ -9,7 +9,7 @@ First, you need to locate your user password for publishing which can be found i
 
 Next, right-click on your project and select "Publish...". Your Publish Profile should appear, configured with all your application's settings. When you select "Publish", you'll be prompted for the user password you just copied. Paste it in and select OK.  
 
-> Alternatively, you can select the "Settings..." button and save your password, so you don't have to enter it every time you want to publish.
+> Alternatively, you can select the "Configure" button and save your password, so you don't have to enter it every time you want to publish.
 
 Once your Web App Bot has successfully republished to Azure Bot Service, you'll get a pop-up web page, similar to that of when you run the bot locally. The difference is that the URL should match your bot's published URL. You can close this window.  
 
