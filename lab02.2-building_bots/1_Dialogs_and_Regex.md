@@ -13,9 +13,11 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Download the Bot Framework Emulator  
 
-You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and downloading the most recent version of the emulator that has the tag "Latest Release" (select the ".exe" file, if you are using windows).  
+You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and downloading the most recent version of the emulator that has the tag "4.1.0" (select the ".exe" file, if you are using windows).  
 
 The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-`_version_`\botframework-emulator.exe` or to your Downloads folder, depending on browser.  
+
+**If you're using a DSVM, you'll need to run the Emulator as an administrator.**
 
 Now that you've downloaded and open the Bot Emulator, the next thing you have to set up is [ngrok, which allows us to connect to bots hosted remotely](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0#configure-ngrok). While most of the testing we'll do is local, you'll need ngrok to access the published version of the bot in the Emulator. There are two main steps to set this up:
 1. Download ngrok from this website: https://ngrok.com/download. Click "Save as" when you download it so you can control where it gets saved (pick your Documents or Downloads folder, it should default to Downloads). Next, navigate to the install location and unzip the file (right click and select "Extract all...") and extract it one level up from the downloaded file (e.g. to  C:\Users\antho\Downloads\).  
@@ -65,7 +67,7 @@ Next, we'll focus on the NuGet packages we need. Right-click on the solution in 
 **Do not update Microsoft.AspNetCore.All or Microsoft.AspNetCore**.  
 
 
-In the "Updates" tab, update the following packages **in order** to `4.1.1`:
+In the "Installed" tab, update the following packages **in order** to `4.1.5` (this may already be done):
 * Microsoft.Bot.Configuration
 * Microsoft.Bot.Schema
 * Microsoft.Bot.Connector
@@ -158,7 +160,7 @@ Once you feel semi-comfortable with the code/comments, replace the `OnTurnAsync`
             }
         }
 ```
-Now start your bot (with or without debugging) by pressing the button that looks like a play button, it should say "PictureBot" (or by hitting F5 on your keyboard). NuGet should take care of downloading the appropriate dependencies. You may hit some break points, **remove them** and select "Contiue" (by the play button).  
+Now start your bot (with or without debugging) by pressing the button that looks like a play button, it should say "PictureBot" (or by hitting F5 on your keyboard). NuGet should take care of downloading the appropriate dependencies. You may hit some break points, **remove them** and select "Continue" (by the play button).  
 
 A few things to note:
 
@@ -170,7 +172,7 @@ Get stuck or broken? You can find the solution for the lab up until this point u
 
 #### Using the Bot Framework Emulator  
 To interact with your bot:
-* Launch the Bot Framework Emulator (note we are using the v4 PREVIEW Emulator). 
+* Launch the Bot Framework Emulator (note we are using the v4 Emulator). 
 * Select "Open bot" on the Welcome page and navigate to the file ending in ".bot" in the root of your project. You'll be asked to enter your `botSecret`.
 * Now, you should be able to click the message tab (on the left menu) and 'development' listed under "ENDPOINT." You should also see a 'production' endpoint listed, which we'll discuss next.
 * You should now be able to converse with the bot. 
@@ -560,7 +562,7 @@ Ultimately, we'll use some middleware to try to understand what users are saying
 
 To add the middleware for Regex to your solution, create a new folder called "Middleware," and add the contents of the "Middleware" folder (you can find this under **resources > code**) to your solution. **You can also use this middleware in your future projects!**
 
-In "Startup.cs", below the "Add Regex ability below" comment within `ConfigureServices`, add the following:
+In "Startup.cs", below the "Add Regex below" comment within `ConfigureServices`, add the following:
 ```csharp
                 middleware.Add(new RegExpRecognizerMiddleware()
                 .AddIntent("search", new Regex("search picture(?:s)*(.*)|search pic(?:s)*(.*)", RegexOptions.IgnoreCase))

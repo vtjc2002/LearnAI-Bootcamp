@@ -19,7 +19,9 @@ Once we've thought out our app, we are ready to [build and train it](https://doc
 Take some time to review the links referenced to above.
 
 
-### Lab 1.1: Creating the LUIS service in the portal
+### Lab 1.1: Creating the LUIS service in the portal (optional)
+
+> Note: Creating a LUIS service in the portal is optional, as LUIS provides you with a "starter key" that you can use for the labs. However, if you want to see how to create a free or paid service in the portal, you can follow the steps below.  
 
 In the Portal, hit **Create a resource** and then enter **LUIS** in the search box and choose **Language Understanding**:
 
@@ -71,7 +73,7 @@ Click on "Entities" in the left-hand column and then click "Create new entity". 
 
 ![Add Facet Entity](./resources/assets/LuisCreateEntity.png) 
 
-Next, click "Intents" in the left-hand sidebar and then click the blue "Create new intent" button.  Give it an intent name of "SearchPics" and then click "Done".  
+Next, click "Intents" in the left-hand sidebar and then click the "Create new intent" button.  Give it an intent name of "SearchPics" and then click "Done".  
 
 Just as we did for Greetings, let's add some sample utterances (words/phrases/sentences the user might say when talking to the bot).  People might search for pictures in many ways.  Feel free to use some of the utterances below, and add your own wording for how you would ask a bot to search for pictures. 
 
@@ -107,9 +109,8 @@ We are now ready to train our model.  Click "Train" in the top right bar.  This 
 
 Next, click on "Manage" in the top bar. You'll have several options on the left side of the window (Application Information, Keys and Endpoints, Publish Settings, Versions, Collaborators). You can read more about the various publish options [here](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp).
 
-If you have not already done so, select or add (by clicking the "Add Key" button towards the bottom of the page on the "Keys and Endpoints" tab) the endpoint key that you set up earlier, or follow the link to add a key from your Azure account 
-(for testing and learning purposes, you can also just use the "Starter_Key"
-). You can leave the endpoint slot as "Production".  Then click "Publish" in the top bar. You'll have the option to publish to your "Production" or "Staging" endpoint. Select "Production", and [read about the reasons for the two endpoints](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-version). Finally, click "Publish".  
+If you completed the optional step of creating a LUIS service in the portal, select or add (by clicking the "Add Key" button towards the bottom of the page on the "Keys and Endpoints" tab) the endpoint key that you set up earlier, or follow the link to add a key from your Azure account 
+(for testing and learning purposes, you can also just use the "Starter_Key", which is why creating the LUIS service was optional). You can leave the endpoint slot as "Production".  Then click "Publish" in the top bar. You'll have the option to publish to your "Production" or "Staging" endpoint. Select "Production", and [read about the reasons for the two endpoints](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-version). Finally, click "Publish".  
 
 
 

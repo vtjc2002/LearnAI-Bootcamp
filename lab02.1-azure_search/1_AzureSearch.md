@@ -28,7 +28,7 @@ Typical Workflow:
 
 Within the Azure Portal, click **Create a resource**, enter "azure search" in the search bar, and click **Azure Search->Create**.
 
-Once you click this, you'll have to fill out a few fields as you see fit. For this lab, the "F0" free tier is sufficient. You are only able to have one Free Azure Search instance per subscription, so if you or another member on your subscription have already done this, you will need to use the "Basic" pricing tier. Use the one Resource Group for all of the labs in this workshop. If you already have a resource group for this workshop, just use that one. Put in one of the following locations: West US 2, East US, West Europe, Southeast Asia.
+Once you click this, you'll have to fill out a few fields as you see fit. For this lab, the "F" free tier is sufficient. You are only able to have one Free Azure Search instance per subscription, so if you or another member on your subscription have already done this, you will need to use the "Basic" pricing tier. Use the one Resource Group for all of the labs in this workshop. If you already have a resource group for this workshop, just use that one. Put in one of the following locations: West US, West US 2, East US, West Europe, Southeast Asia.
 
 Once creation is complete, open the panel for your new search service.
 
@@ -40,31 +40,27 @@ For this lab, we will use the [Azure Search Indexer for Cosmos DB](https://docs.
 
 ![Import Wizard](./resources/assets/AzureSearch-ImportData.png) 
 
-Within the Azure Search blade you just created, click **Import Data->Data Source->Cosmos DB**.
+Within the Azure Search blade you just created, click **Import Data->Data Source->Cosmos DB**.  
 
-![Import Wizard for DocDB](./resources/assets/AzureSearch-DataSource.png) 
+Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and find a friendly neighbor that is willing to provide their connection string. For both, the Database should be "images" and the Collection should be "metadata".  
 
-Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and find a friendly neighbor that is willing to provide their connection string. For both, the Database should be "images" and the Collection should be "metadata".
+Click **OK** or **Next** twice to skip Cognitive Search. If you're like to look into Cognitive Search, we recommend [this bootcamp](https://aka.ms/kmb).  
 
-Click **OK**.
-
-At this point Azure Search will connect to your Cosmos DB container and analyze a few documents to identify a default schema for your Azure Search Index. After this is complete, you can set the properties for the fields as needed by your application (e.g. you can "Customize target index").
+At this point Azure Search will connect to your Cosmos DB container and analyze a few documents to identify a default schema for your Azure Search Index. After this is complete, you can set the properties for the fields as needed by your application (e.g. you can "Customize target index").  
 
 >Note: You may see a warning that "_ts" fields are not valid field names. You can ignore this for our labs, but you can read more about it [here](https://docs.microsoft.com/azure/search/search-indexer-field-mappings).
 
->Note: You may notice that you are offered the option to "add congitive skills". You can ignore this for now.
+Update the Index name to: **images**  
 
-Update the Index name to: **images**
+Update the Key to: **id** (which uniquely identifies each document)  
 
-Update the Key to: **id** (which uniquely identifies each document)
+Set all fields to be **Retrievable** (to allow the client to retrieve these fields when searched)  
 
-Set all fields to be **Retrievable** (to allow the client to retrieve these fields when searched)
+Set the fields **Tags** to be **Filterable** (to allow the client to filter results based on these values)  
 
-Set the fields **Tags** to be **Filterable** (to allow the client to filter results based on these values)
+Set the fields **Tags** to be **Facetable** (to allow the client to group the results by count, for example for your search result, there were "5 pictures that had a Tag of "beach")  
 
-Set the fields **Tags** to be **Facetable** (to allow the client to group the results by count, for example for your search result, there were "5 pictures that had a Tag of "beach")
-
-Set the fields **Caption and Tags** to be **Searchable** (to allow the client to do full text search over the text in these fields)
+Set the fields **Caption and Tags** to be **Searchable** (to allow the client to do full text search over the text in these fields)   
 
 ![Configure Azure Search Index](./resources/assets/AzureSearch-ConfigureIndex.png) 
 
@@ -81,13 +77,13 @@ Click the **Suggester** checkbox and enter a Suggester Name: **sg** and choose *
 
 ![Search Suggestions](./resources/assets/AzureSearch-Suggester.png) 
 
-Click **OK** to complete the configuration of the Indexer.  
+Click **OK** or **Next** to complete the configuration of the Indexer.  
 
 Next, we configure how to "Import your data". You could set at schedule for how often the Indexer should check for changes, however, for this lab we will just run it once.  
 
 Click **Advanced Options** and choose to **Base 64 Encode Keys** to ensure that the ID field only uses characters supported in the Azure Search key field.
 
-Click **OK, three times** to start the Indexer job that will start the importing of the data from the Cosmos DB database.
+Click **OK** or **Submit** to start the Indexer job that will start the importing of the data from the Cosmos DB database.
 
 ![Configure Indexer](./resources/assets/AzureSearch-ConfigureIndexer.png) 
 
@@ -124,7 +120,7 @@ Choose send and you should see the data formatted in JSON format.
 
 Try performing other searches using [examples such as these](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents#a-namebkmkexamplesa-examples).
 
-**Looking to add cognitive skills to your Azure Search Service? Check out [these labs](https://github.com/Azure/LearnAI-Cognitive-Search) and [the documentation](https://docs.microsoft.com/en-us/azure/search/cognitive-search-concept-intro) to learn about Cognitive Search.**
+**Looking to add cognitive skills to your Azure Search Service? Check out [these labs](https://aka.ms/kmb) and [the documentation](https://docs.microsoft.com/en-us/azure/search/cognitive-search-concept-intro) to learn about Cognitive Search.**
 
 
 Back to [README](./0_README.md)

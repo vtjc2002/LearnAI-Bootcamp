@@ -342,7 +342,7 @@ namespace Microsoft.PictureBot
             //IMPORTANT: replace this variable with your Cognitive Services subscription key.
             string subscriptionKey = "YourBingKey";
             //initialize the client
-            var client = new ImageSearchAPI(new ApiKeyServiceClientCredentials(subscriptionKey));
+            var client = new ImageSearchClient(new ApiKeyServiceClientCredentials(subscriptionKey));
             //images to be returned by the Bing Image Search API
             Images imageResults = null;
             try

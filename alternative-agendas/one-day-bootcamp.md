@@ -48,7 +48,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 - 12:30-1:30: Lunch
 - 1:30-2:30: [Lab 2.1: Developing Intelligent Applications with Azure Search][lab-azsearch-301]
 - 2:30-4:30: [Lab 2.2: Building Intelligent Bots][lab-intelbot-301]
-    - Finish early? Try this: [Lab 2.3: Enhancing Applications with Bing Search](./lab02.3-bing_search/0_README.md)
+    - Finish early? Try this: [Lab 2.3: Enhancing Applications with Bing Search](https://github.com/Azure/LearnAI-Bootcamp/blob/master/lab02.3-bing_search/0_README.md)
 - 4:30-5: Q&A and Feedback for Emerging AI Bootcamp
  
 

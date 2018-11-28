@@ -1,6 +1,8 @@
 ## 1_Setup:
 Estimated Time: 30-40 minutes
 
+> Note: If you have been provided an environment for completing this bootcamp, log in to the Azure Portal (in a private window) with the provided credentials. Connect to your VM. Next, complete Lab 1.1 Steps 2-4. Additionally, you need to make note of the keys provided (should be sent to the email address you provided) and add them to the appropriate sections in `settings.json` (see the beginning of Lab 1.2).
+
 ### Lab: Setting up your Azure Account
 
 You may activate an Azure free trial at [https://azure.microsoft.com/en-us/free/](https://azure.microsoft.com/en-us/free/).  

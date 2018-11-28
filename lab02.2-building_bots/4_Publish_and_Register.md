@@ -13,6 +13,7 @@ Next, right-click on your project and select "Publish...". Your Publish Profile 
 
 Once your Web App Bot has successfully republished to Azure Bot Service, you'll get a pop-up web page, similar to that of when you run the bot locally. The difference is that the URL should match your bot's published URL. You can close this window.  
 
+
 ### Lab 4.2: Testing the published bot
 
 #### Using the Emulator
