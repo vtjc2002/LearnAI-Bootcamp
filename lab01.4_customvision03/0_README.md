@@ -58,7 +58,7 @@ If you recieve the following error
 Peform the following steps
 
 1. Create a folder in the C:\ named Temp
-2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.3_customvision02\Resources\Starter
+2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.4_customvision03\Resources\Starter
 3. Copy the CustomVision.Sample folder
 4. Browse to C:\Temp, right click and click Paste
 5. Wait until the copy completes 
