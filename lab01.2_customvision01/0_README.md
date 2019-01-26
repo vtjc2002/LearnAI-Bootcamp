@@ -29,7 +29,7 @@ You can use this lab as a template for building your own app using the Custom Vi
 
 This workshop is meant for an AI Developer on Azure. Since this is a short workshop, there are certain things you need before you arrive.
 
-### Platform requirements
+## Platform requirements
 
 Firstly, you should have experience with Visual Studio. We will be using it for everything we are building in the workshop, so you should be familiar with [how to use it](https://docs.microsoft.com/en-us/visualstudio/ide/visual-studio-ide) to create applications. Additionally, this is not a class where we teach you how to code or develop applications. We assume you know how to code in C# (you can learn [here](https://mva.microsoft.com/en-us/training-courses/c-fundamentals-for-absolute-beginners-16169?l=Lvld4EQIC_2706218949)).
 
@@ -37,17 +37,6 @@ Secondly, you should have experience with the portal and be able to create resou
 
 >Note: This example has been tested using the .NET Framework using [Visual Studio 2017,
 Community Edition](https://www.visualstudio.com/downloads/)
-
-### The API keys
-
-You also need to have a training and prediction API key. The training API key allows you to
-create, manage, and train Custom Vision projects programatically. All operations
-on <https://customvision.ai> are exposed through this library, allowing you to
-automate all aspects of the Custom Vision Service. You can obtain a key by
-accessing <https://customvision.ai> and then clicking on the
-"setting" gear in the top right.
-
-> Note: Internet Explorer is not supported. We recommend using Edge, Firefox, or Chrome.
 
 ## Introduction
 
