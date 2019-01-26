@@ -34,6 +34,19 @@ Peform the following steps
 4. Browse to C:\Temp, right click and click Paste
 5. Wait until the copy completes 
 
+
+## Step 0: The API keys
+
+You also need to have a training and prediction API key. The training API key allows you to 
+create, manage, and train Custom Vision projects programatically. All operations
+on <https://customvision.ai> are exposed through this library, allowing you to
+automate all aspects of the Custom Vision Service. You can obtain a key by
+accessing <https://customvision.ai> and then clicking on the
+"setting" gear in the top right.
+
+> Note: Internet Explorer is not supported. We recommend using Edge, Firefox, or Chrome.
+
+
 ## Step 1: Create a console application and prepare the training key and the images needed for the example.
 
 Start Visual Studio 2017, Community Edition, open the Visual Studio solution
