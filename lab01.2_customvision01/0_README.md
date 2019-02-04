@@ -46,14 +46,8 @@ An example could include looking for part defects in a manufacturing process. In
 
 ## Architecture
 
-In a previous lab (`lab01.1-computer_vision`), you built a simple C# application that allows you to ingest pictures from your local drive, then invoke the [Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) Cognitive Service to grab tags and a description for those images, as represented by the vision icon in the architecture diagram.
+For now, this lab **isn't** connected to the rest of the solution you are building in this training. But this may change in CY-2019.
 
-![Architecture Diagram](./\Resources\Instructor\images/AI_Immersion_Arch.png)
-
-In scenarios where computer vision does not work, you could easily replace this with another service such as Custom Vision
-
-> **Note**  
-> For the purpose of the remaining workshop content. The Picturebot application will be built using the Computer Vision service, but hopefully you can appreciate that a wide variety of cognitive services could be used, depending upon your scenario
 
 ### Continue to [1_Classification_Lab](./1_Classification_Lab.md)
 
