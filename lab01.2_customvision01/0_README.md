@@ -48,7 +48,7 @@ An example could include looking for part defects in a manufacturing process. In
 
 In a previous lab (`lab01.1-computer_vision`), you built a simple C# application that allows you to ingest pictures from your local drive, then invoke the [Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) Cognitive Service to grab tags and a description for those images, as represented by the vision icon in the architecture diagram.
 
-![Architecture Diagram](./\Resources\Instructor\images/AI_Immersion_Arch.png)
+![Architecture Diagram](./resources/assets/AI_Immersion_Arch.png)
 
 In scenarios where computer vision does not work, you could easily replace this with another service such as Custom Vision
 
