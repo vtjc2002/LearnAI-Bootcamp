@@ -1,19 +1,18 @@
 # Creating Custom Vision Applications
 
-The goal of this lab is to create a CLI application that uses the Custom Vision API to classify images that you provide to the Custom Vision Service. 
+The goal of this lab is to create a CLI application that uses the Custom Vision API to classify images that you provide to the Custom Vision Service.
 
-The Custom Vision Service is an Azure Cognitive Service that lets you build custom image classifiers. It makes it easy and fast to build, deploy, and improve an image classifier. The Custom Vision Service provides a REST API and a web interface to upload your images and train the classifier.  This service works well in use cases where you are working with images that cannot be identified by other services such as computer vision. 
-
+The Custom Vision Service is an Azure Cognitive Service that lets you build custom image classifiers. It makes it easy and fast to build, deploy, and improve an image classifier. The Custom Vision Service provides a REST API and a web interface to upload your images and train the classifier.  This service works well in use cases where you are working with images that cannot be identified by other services such as computer vision.
 
 > **Note**  
 > This lab will focus on creating a Custom Vision solution using C#.
 > Want the see a Java solution? watch this video [here](https://channel9.msdn.com/Shows/AI-Show/Azure-Custom-Vision-How-to-Train-and-Identify-Unique-Designs-or-Image-Content), but note that we will not be maintaining the link to this video.
- 
 
 ## Objectives
 
 In this workshop, you will:
-- Create a classification project.
+
+- Create a classification project
 - Upload images.
 - Add tags to images.
 - Train a classification project.
@@ -48,9 +47,4 @@ An example could include looking for part defects in a manufacturing process. In
 
 For now, this lab **isn't** connected to the rest of the solution you are building in this training. But this may change in CY-2019.
 
-
 ### Continue to [1_Classification_Lab](./1_Classification_Lab.md)
-
-
-
-

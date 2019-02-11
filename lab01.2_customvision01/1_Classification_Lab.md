@@ -1,5 +1,4 @@
-**Lab: Creating Image Classification Applications using the Custom Vision API**
----------------------------------------------
+# Lab: Creating Image Classification Applications using the Custom Vision API
 
 In this lab, you will create an application that deals with the classification of plants.
 
@@ -10,21 +9,20 @@ In the Resources\Images folder are three folders:
 - Test
 
 The Hemlock and Japanese Cherry folders contain images of these types of plants that
-will be classified by tagging and training the images. The Test folder contains an image that will be used to 
+will be classified by tagging and training the images. The Test folder contains an image that will be used to
 perform the test prediction
 
-**Important Note should you receive a Nuget Package Error**
------------------------------------------------------------
- 
+## Important Note should you receive a Nuget Package Error
+
 Long files name can cause Nuget package failures. Should you receive this error,
 it is recommended that you place the solution files in a folder you have created
-to reduce the number of characters in the filepath. 
+to reduce the number of characters in the filepath.
 
 If you receive the following error
 
->NuGet Package restore failed for project ObjectDetection: 
->The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
->and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.		
+>NuGet Package restore failed for project ObjectDetection:
+>The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters,
+>and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.
 
 Peform the following steps
 
@@ -32,12 +30,11 @@ Peform the following steps
 2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.2_customvision01\Resources\Starter
 3. Copy the CustomVision.Sample folder
 4. Browse to C:\Temp, right click and click Paste
-5. Wait until the copy completes 
-
+5. Wait until the copy completes
 
 ## Step 0: The API keys
 
-You also need to have a training and prediction API key. The training API key allows you to 
+You also need to have a training and prediction API key. The training API key allows you to
 create, manage, and train Custom Vision projects programatically. All operations
 on <https://customvision.ai> are exposed through this library, allowing you to
 automate all aspects of the Custom Vision Service. You can obtain a key by
@@ -46,8 +43,7 @@ accessing <https://customvision.ai> and then clicking on the
 
 > Note: Internet Explorer is not supported. We recommend using Edge, Firefox, or Chrome.
 
-
-## Step 1: Create a console application and prepare the training key and the images needed for the example.
+## Step 1: Create a console application and prepare the training key and the images needed for the example
 
 Start Visual Studio 2017, Community Edition, open the Visual Studio solution
 named **CustomVision.Sample.sln** located in the following sub-directory:
@@ -79,7 +75,7 @@ namespace CustomVision.Sample
 
         static void Main(string[] args)
         {
-            // Add your training and prediction key from the settings page of the portal 
+            // Add your training and prediction key from the settings page of the portal
             string trainingKey = "<add your training key here>";
             string predictionKey = "<add your prediction key here>";
 
@@ -128,17 +124,16 @@ namespace CustomVision.Sample
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Step 2: Add your training and prediction key into the Program.cs file. 
+### Step 2: Add your training and prediction key into the Program.cs file
 
-Under the comment "// Add your training & prediction key from the settings page of the portal" 
-type in the following code to add the training and prediction key to enable access to the 
+Under the comment "// Add your training & prediction key from the settings page of the portal"
+type in the following code to add the training and prediction key to enable access to the
 Custom Vision services
- 
+
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 >            string trainingKey = "<enter your training key here>";
 >            string predictionKey = "<enter your prediction key here>";
 >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
 
 ## Step 3: Create a Custom Vision Service project
 
@@ -151,7 +146,6 @@ var project = trainingApi._("My New Project");
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 >Q. What method should you replace the _ with to create a new Custom Vision Service project?
-
 
 ## Step 4: Add tags to your project
 
@@ -194,7 +188,7 @@ the following code after the end of code that you added in the prior step. This
 creates the first iteration in the project. We can then mark this iteration as
 the default iteration.
 
->Q. What method should you replace the _ with to train the project? 
+>Q. What method should you replace the _ with to train the project?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Now there are images with tags start training the project
@@ -240,18 +234,17 @@ Console.ReadKey();
 
 ## Step 8: Run the example
 
-Build and run the solution. The training and prediction of the images can take 2 minutes. 
+Build and run the solution. The training and prediction of the images can take 2 minutes.
 The prediction results appear on the console.
 
-## Need help?
+## Help
 
 Start Visual Studio 2017, Community Edition, open the Visual Studio solution
 named **CustomVision.Sample.sln** in the solution following sub-directory below:
 
 >Resources/Solution/CustomVision.Sample/CustomVision.Sample.sln
 
-Further Reading
----------------
+### Further Reading
 
 The source code for the Windows client library is available on
 [github](https://github.com/Microsoft/Cognitive-CustomVision-Windows/).
