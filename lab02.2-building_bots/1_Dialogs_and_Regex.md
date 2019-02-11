@@ -1,4 +1,5 @@
-## 1_Dialogs_and_Regex:
+# 1_Dialogs_and_Regex
+
 Estimated Time: 60-75 minutes
 
 ## Building a Bot

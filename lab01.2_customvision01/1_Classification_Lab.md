@@ -26,10 +26,10 @@ If you receive the following error
 
 Peform the following steps
 
-1. Create a folder in the C:\ named Temp
-2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.2_customvision01\Resources\Starter
-3. Copy the CustomVision.Sample folder
-4. Browse to C:\Temp, right click and click Paste
+1. Create a folder in the C:\ named Temp1
+2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.2_customvision01\
+3. Copy the Resources folder
+4. Browse to C:\Temp1, right click and click Paste
 5. Wait until the copy completes
 
 ## Step 0: The API keys
@@ -54,7 +54,7 @@ Once opened, rebuild the solution. Then, within Solution Explorer, double click 
 
 At the bottom of the Progam.cs file are  methods called `TrainingApiCredentials` and `PredictionEndpointCredentials` which instantiates the training and prediction key respectively. Finally, there is one called `LoadImagesFromDisk` that loads two sets of images that this used to train the project, and one that performs the prediction test with a test image using the default prediction endpoint. On opening the project the following code should be displayed from line 35:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```c#
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -121,8 +121,7 @@ namespace CustomVision.Sample
         }
     }
 }
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ### Step 2: Add your training and prediction key into the Program.cs file
 
@@ -130,20 +129,20 @@ Under the comment "// Add your training & prediction key from the settings page 
 type in the following code to add the training and prediction key to enable access to the
 Custom Vision services
 
->~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->            string trainingKey = "<enter your training key here>";
->            string predictionKey = "<enter your prediction key here>";
->~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```c#
+string trainingKey = "<enter your training key here>";
+string predictionKey = "<enter your prediction key here>";
+```
 
 ## Step 3: Create a Custom Vision Service project
 
 To create a new Custom Vision Service project, add the following code in the body of the `Main()` method after the call to `new TrainingApi().`
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```c#
 // Create a new project
 Console.WriteLine("Creating new project:");
 var project = trainingApi._("My New Project");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 >Q. What method should you replace the _ with to create a new Custom Vision Service project?
 
@@ -152,11 +151,11 @@ var project = trainingApi._("My New Project");
 To add tags to your project, insert the following code after the call to
 `("My New Project");`.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```c#
 // Make two tags in the new project
 var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");
 var japaneseCherryTag = trainingApi._(project.Id, "Japanese Cherry");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 >Q. What method should you replace the _ with to create a tag for Japanese Cherry?
 
@@ -164,7 +163,8 @@ var japaneseCherryTag = trainingApi._(project.Id, "Japanese Cherry");
 
 To add the images we have in memory to the project, insert the following code
 after the call to `(project.Id, "Japanese Cherry")` method.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```c#
 // Add some images to the tags
 Console.WriteLine("\tUploading images");
 LoadImagesFromDisk();
@@ -179,7 +179,7 @@ foreach (var image in japaneseCherryImages)
 {
    trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { japaneseCherryTag.Id.ToString() });
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Step 6: Train the project
 
@@ -190,7 +190,7 @@ the default iteration.
 
 >Q. What method should you replace the _ with to train the project?
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```c#
 // Now there are images with tags start training the project
 Console.WriteLine("\tTraining");
 var iteration = trainingApi._(project.Id);
@@ -208,7 +208,7 @@ while (iteration.Status == "Training")
 iteration.IsDefault = true;
 trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
 Console.WriteLine("Done!\n");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Step 7: Get and use the default prediction endpoint
 
@@ -216,7 +216,8 @@ We are now ready to use the model for prediction. First we obtain the endpoint
 associated with the default iteration. Then we send a test image to the project
 using that endpoint. Insert the code after the training code you have just
 entered.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```c#
 // Now there is a trained endpoint, it can be used to make a prediction  
 PredictionEndpoint endpoint = new PredictionEndpoint() { ApiKey = predictionKey };
 
@@ -230,7 +231,7 @@ foreach (var c in result.Predictions)
     Console.WriteLine($"\t{c.TagName}: {c.Probability:P1}");
 }
 Console.ReadKey();
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Step 8: Run the example
 
