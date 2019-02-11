@@ -15,7 +15,7 @@ Your group has been tasked to suggest answers to the following questions:
 
 1. Which features from Azure Search should you take advantage of?  
 2. How can bot logging be used to benefit Contoso?
-3. What are some tasks you'll have to complete to create an efficient and functional calling bot?    
+3. What are some tasks you'll have to complete to create an efficient and functional calling bot?
 
 Work in team of 4 or 5 as assigned by the instructor to discuss the options that
 are available. This will be time limited between 20 - 30 mins.
@@ -24,6 +24,3 @@ are available. This will be time limited between 20 - 30 mins.
 
 Your instructor will invite a member of your team to provide a description of
 your answer and discuss with the wider group
-
- 
--
