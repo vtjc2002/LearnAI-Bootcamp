@@ -46,19 +46,19 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 
 - Day 1: Cognitive Services
   - 8-9 (optional): Setup assistance
-  - 9-10: Introduction and Context for Cognitive Services
-  - 10-12: [Lab 1.1: Simplifying Cognitive Services App Development using Portable Class Libraries][lab-cogsrvc-301]
+  - 9-10: Introduction and Context for [Cognitive Services](http://www.azure.com/cognitive)
+  - 10-12: [Lab 1.1: Simplifying Cognitive Services App Development using Portable Class Libraries](./lab01.1-computer_vision/0_README.md)
   - 12-1: Lunch
   - 1-1:30: Introduction to Custom Vision
-  - 1:30-2: [Lab 1.2: Creating an Image Classification Application using the Custom Vision Service][lab-cogsrvc-321]
-  - 2-2:30: [Lab 1.3: Creating an Object Detection Application using the Custom Vision Service][lab-cogsrvc-322]
+  - 1:30-2: [Lab 1.2: Creating an Image Classification Application using the Custom Vision Service](./lab01.2_customvision01/0_README.md)
+  - 2-2:30: [Lab 1.3: Creating an Object Detection Application using the Custom Vision Service](./lab01.3_customvision02/0_README.md)
   - 2:30-2:45: Break
-  - 2:45-3:45: [Lab 1.5: Developing Intelligent Applications with LUIS][lab-cogsrvc-341]
+  - 2:45-3:45: [Lab 1.5: Developing Intelligent Applications with LUIS](./lab01.5-luis/0_README.md)
   - 3:45-5: [Business Case I - Cognitive Services](./lab01.6-bootcamp_case_1/Case_Part1.md)
 - Day 2: Bots
-  - 9-10: [Lab 2.1: Developing Intelligent Applications with Azure Search][lab-azsearch-301]
+  - 9-10: [Lab 2.1: Developing Intelligent Applications with Azure Search](./lab02.1-azure_search/0_README.md)
   - 10-10:30: Introduction and Context for Bots
-  - 10:30-12:30: [Lab 2.2: Building Intelligent Bots][lab-intelbot-301]
+  - 10:30-12:30: [Lab 2.2: Building Intelligent Bots](./lab02.2-building_bots/0_README.md)
   - 12:30-1:30: Lunch
   - 1:30-3:  [Lab 2.3: Enhancing Applications with Bing Search](./lab02.3-bing_search/0_README.md)
   - 3-3:15: Break
