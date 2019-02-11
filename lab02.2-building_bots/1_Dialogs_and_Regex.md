@@ -126,15 +126,19 @@ As you probably know, renaming a Visual Studio Solution/Project is a very sensit
 #### Creating a Hello World bot
 So now that we've updated our base shell to support the naming and NuGet packages we'll use throughout the rest of the labs, we're ready to start adding some custom code. First, we'll just create a simple "Hello world" bot that helps you get warmed up to building bots with the V4 SDK.
 
----  
+An important concept is the "turn", used to describe a message to a user and a response from the bot. 
+For example, if I say "Hello bot" and the bot responds "Hi, how are you?" that is **one** turn. Check in the image below how a **turn** goes trought the multiple layers of a bot application.
 
+![Bots Concepts](./resources/assets/bots-concepts-middleware.png) 
 
 For the purposes of this section of the lab, navigate to the ConfigureServices method in Startup.cs and comment out (using `//`) the line `CounterState = conversationState.CreateProperty<CounterState>(PictureBotAccessors.CounterStateName),`. We'll talk about state and accessors in future sections.
 
 The only other file we need to update to get "Hello world" working is "PictureBot.cs". Open the file and review the comments.  
 
-Once you feel semi-comfortable with the code/comments, replace the `OnTurnAsync` method with the code below. This method is called every turn of the conversation. You'll see later why that fact is important, but for now, remember that OnTurnAsync is called on every turn.
-> Aside: A "turn" is used to describe a message to a user and a response from the bot. For example, if I say "Hello bot" and the bot responds "Hi, how are you?" that is **one** turn.
+Once you feel semi-comfortable with the code/comments, replace the `OnTurnAsync` method with the code below. 
+This method is called every turn of the conversation. You'll see later why that fact is important, but for now, remember that OnTurnAsync is called on every turn.
+
+
 ```csharp
         /// <summary>
         /// Every conversation turn for our PictureBot will call this method.
