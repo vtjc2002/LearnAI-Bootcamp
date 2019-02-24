@@ -85,7 +85,7 @@ Contact us: learnAI@microsoft.com and http://aka.ms/LearnAI-GitHub
 
 ## Certifications
 
-The LearnAI team had intense participation in the creation of the following new certifications from Microsoft:
+The LearnAI team had intense participation in the creation of the following new Microsoft certifications:
 
 + Azure Data Engineer​
   + DP-200: Implementing an Azure Data Solution ​
