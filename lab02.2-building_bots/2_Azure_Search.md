@@ -1,17 +1,19 @@
-## 2_Azure_Search:
+# 2_Azure_Search
+
 Estimated Time: 10-15 minutes
 
-We now have a bot that can communicate with us if we use very specific words. The next thing we need to do is set up a connection to the Azure Search index we created in "lab02.1-azure_search." 
+We now have a bot that can communicate with us if we use very specific words. The next thing we need to do is set up a connection to the Azure Search index we created in "lab02.1-azure_search."
 
-### Lab 2.1: Update the bot to use Azure Search
+## Lab 2.1: Update the bot to use Azure Search
 
 First, we need to update "SearchDialog" to request a search and process the response. We'll have to call Azure Search here, so make sure you've added the NuGet package (you should have done this in an earlier lab, but here's a friendly reminder).
 
-![Azure Search NuGet](./resources/assets/AzureSearchNuGet.jpg) 
+![Azure Search NuGet](./resources/assets/AzureSearchNuGet.jpg)
 
 Open "PictureBot.cs" and locate `var search_waterfallsteps`. Here is where we'll add the names of the tasks we need to run through this dialog. For PictureBot, we'll have two steps: `SearchRequestAsync` and `SearchAsync`. Add them to the variable `search_waterfallsteps`.  
 
 For `SearchRequestAsync`, you need to check if the user has told us what to search for. You can do this by accessing PictureState to see what `state.Searching` is set to. If the state is "no", then we need to change the state to "yes" and then prompt the user what they want to search for. You can read more about [using the dialog library to gather input here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0&tabs=csharp). Review the following code, then add it below `// Add SearchDialog-related tasks`:
+
 ```csharp
         private async Task<DialogTurnResult> SearchRequestAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
@@ -38,6 +40,7 @@ For `SearchRequestAsync`, you need to check if the user has told us what to sear
 ```
 
 In the second step for SearchDialog, we will process the user's search request and return the results. Add the following below the `SearchRequestAsync` task:
+
 ```csharp
         private async Task<DialogTurnResult> SearchAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
@@ -65,17 +68,19 @@ In the second step for SearchDialog, we will process the user's search request a
             return await stepContext.EndDialogAsync();
         }
 ```
+
 Review the code line-by-line with a neighbor and confirm you both follow what is happening.  
 
 You should be able to see that we're taking in the response from the user, confirming with the user what we're searching for, and waiting for the results of the StartAsync method before ending the dialog. Note that you're getting an error for `StartAsync`, can you figure out why?  
 
 We're getting an error for `StartAsync` simply because we haven't created it yet. We need this task (along with some tasks we'll build into it) to accomplish several things in order to process the user's search:  
 
-1.  Establish a connection to the search service
-2.  Call the search service and store the results
-3.  Put the results in a message and respond to the user
+1. Establish a connection to the search service
+2. Call the search service and store the results
+3. Put the results in a message and respond to the user
 
 Discuss with a neighbor which methods below accomplish which tasks above, and how:
+
 ```csharp
         public async Task StartAsync(ITurnContext context, string searchText)
         {
@@ -128,7 +133,7 @@ Set the value for the "YourSearchServiceName" to be the name of the Azure Search
 
 Set the value for the "YourSearchServiceKey" to be the key for this service.  This can be found in the [Azure portal](https://portal.azure.com) under the Keys section for your Azure Search.  In the below screenshot, the SearchServiceName would be "aiimmersionsearch" and the SearchServiceKey would be "375...".  
 
-![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
+![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg)
 
 Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index in the Azure Search lab.  
 
@@ -140,7 +145,8 @@ You might also notice that if you run the bot, greet the bot, and then submit "d
 
 If you struggled with either (or both) of the above comments, you probably are feeling that this bot is not very smart. It's not understanding what you're trying to do, even though (you feel like) you're being clear. In the next lab, we'll address this frustration, so it is valuable for you to experience it.
 
-Get stuck? You can find the solution for this lab under **resources > code**. We recommend using this as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys. The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.   
+Get stuck? You can find the solution for this lab under **resources > code**. We recommend using this as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys. The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.
 
-### Continue to [3_LUIS](./3_LUIS.md)  
+### Continue to [3_LUIS](./3_LUIS.md)
+
 Back to [README](./0_README.md)

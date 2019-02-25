@@ -70,9 +70,9 @@ namespace CustomVision.Sample
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
-            hemlockImages = Directory.GetFiles(@"..\..\..\..\Images\Hemlock").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            japaneseCherryImages = Directory.GetFiles(@"..\..\..\..\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\Test\test_image.jpg"));
+            hemlockImages = Directory.GetFiles(@"C:\temp1\Resources\Images\Hemlock").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            japaneseCherryImages = Directory.GetFiles(@"C:\temp1\Resources\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(@"C:\temp1\Resources\Images\Test\test_image.jpg"));
 
         }
     }

@@ -1,22 +1,24 @@
 # Bootcamp Case
 
 ## Scenario
-You've been assigned a new customer, Contoso LLC, which sells bicycles and bicycle equipment to its customers. Contoso currently processes new product orders and queries through human operators. They are looking for an automated solution that allows Contoso to seamlessly scale up to handle large call volumes while maintaining zero wait times and freeing up staff to manage other tasks. 
+
+You've been assigned a new customer, Contoso LLC, which sells bicycles and bicycle equipment to its customers. Contoso currently processes new product orders and queries through human operators. They are looking for an automated solution that allows Contoso to seamlessly scale up to handle large call volumes while maintaining zero wait times and freeing up staff to manage other tasks.
 
 ## Architecture
-Your team recently presented a potential architecture (below) that Contoso LLC approved. 
+
+Your team recently presented a potential architecture (below) that Contoso LLC approved.
 
 ![architecture](./resources/assets/arch.png)
 
 * [Skype Client](https://www.skype.com/)  
 User initiates call
-* [Bot Connector](https://dev.botframework.com/) + [Skype Calling Channel](https://dev.skype.com/bots)   
+* [Bot Connector](https://dev.botframework.com/) + [Skype Calling Channel](https://dev.skype.com/bots)
 Routes calls from Skype to the bot
 * [Azure App Services](https://docs.microsoft.com/en-us/azure/app-service/)  
 Hosts the bot application, which manages logic and API calls
 * [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/)  
 Stores bot state and event logs
-* [Speech Service](https://docs.microsoft.com/en-us/azure/cognitive-services/speech/home)    
+* [Speech Service](https://docs.microsoft.com/en-us/azure/cognitive-services/speech/home)
 Processes speech-to-text
 * [LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Home)  (Language Understanding Intelligent Service)  
 Extracts intent and entities from text
@@ -28,6 +30,7 @@ Stores product and order data
 Stores bot audio data for debugging
 
 ## Day 1 Assignment
+
 Your team is preparing a proof of concept, and your group has been tasked to suggest answers to the following questions:
 
 1. What might your main intents in LUIS be?  

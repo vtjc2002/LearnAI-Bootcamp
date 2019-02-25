@@ -1,4 +1,5 @@
-## 3_LUIS:
+## 3_LUIS
+
 Estimated Time: 10-15 minutes
 
 Our bot is now capable of taking in a user's input, calling Azure Search, and returning the results in a carousel of Hero cards. Unfortunately, our bot's communication skills are brittle. One typo, or a rephrasing of words, and the bot will not understand. This can cause frustration for the user. We can greatly increase the bot's conversational abilities by enabling it to understand natural language with the LUIS model we built yesterday in "lab01.5-luis."  
