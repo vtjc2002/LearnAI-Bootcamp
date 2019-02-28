@@ -1,13 +1,15 @@
-# LearnAI: Cognitive Services Bootcamp
+# Apps & Agents
 
-Building Intelligent Apps and Agents with the Computer Vision API, Custom Vision Service, LUIS, Bing Search, and Azure Search
+![Header](./assets/header.png)
 
-## Welcome
+## Cognitive Services Bootcamp - Build an Intelligent Search Solution for Images using Microsoft AI Platform
 
-Welcome to the Learn AI Bootcamp for Emerging AI Developers. We will focus on hands-on activities that develop proficiency in Azure Cognitive Services including Computer Vision, Custom Vision, LUIS, and Bing Search. You will also learn to leverage other AI-oriented services such as Azure Search and Azure Bot Services. These labs assume an introductory to intermediate knowledge of these services, and, if this is not the case, then you should spend the time working through the prerequisites.
+## About this course
+
+In this course, you will focus on hands-on activities that develop proficiency in Azure Cognitive Services including Computer Vision, Custom Vision, LUIS, and Bing Search. You will also learn to leverage other AI-oriented services such as Azure Search and Azure Bot Services. These labs assume an introductory to intermediate knowledge of these services, and, if this is not the case, then you should spend the time working through the prerequisites.
 
 > **!!Important note 09/28/2018!!**: The Microsoft Bot Builder SDK V4 went GA at Ignite this week. The bot labs have been updated to SDK V4, but the SDK V3 labs are located in the resources folder for the bot labs (not being maintained). Additionally, we have moved the logging and testing labs to supplementary exercises (not being maintained at the moment), and the bootcamp will focus on the addition of the Bing Search APIs to bots and other applications.  
-> If you are an instructor redelivering this course and have questions, please email learnanalytics@microsoft.com.  
+> If you are an instructor redelivering this course and have questions, please email learnAI@microsoft.com.  
 
 ## Goals
 
@@ -81,26 +83,25 @@ Here are some related courses from the LearnAI team:
 
 ## Contact
 
-Contact us: learnAI@microsoft.com and http://aka.ms/LearnAI-GitHub
+Contact us: learnAI@microsoft.com and <http://aka.ms/LearnAI-GitHub>
 
 ## Certifications
 
 The LearnAI team had intense participation in the creation of the following new Microsoft certifications:
 
-+ Azure Data Engineer​
-  + DP-200: Implementing an Azure Data Solution ​
-  + 80% off discount code thru Mar 12, 2019: DP200BigTrips​
-  + DP-201: Designing an Azure Data Solutions​
-  + 80% off discount code thru Mar 12, 2019: DP201Walks​
+- Azure Data Engineer​
+  - DP-200: Implementing an Azure Data Solution ​
+  - 80% off discount code thru Mar 12, 2019: DP200BigTrips​
+  - DP-201: Designing an Azure Data Solutions​
+  - 80% off discount code thru Mar 12, 2019: DP201Walks​
 
-+ Azure AI Engineer​
-  + AI-100: Designing and Implementing an Azure AI Solution ​
-  + 80% off discount code thru Mar 5, 2019: AI100Goals​
+- Azure AI Engineer​
+  - AI-100: Designing and Implementing an Azure AI Solution ​
+  - 80% off discount code thru Mar 5, 2019: AI100Goals​
 
-+ Azure Data Scientist ​
-  + DP-100: Designing and Implementing a Data Science Solution on Azure​
-  + 80% off discount code thru Mar 7, 2010: DP100KLS​
-
+- Azure Data Scientist ​
+  - DP-100: Designing and Implementing a Data Science Solution on Azure​
+  - 80% off discount code thru Mar 7, 2010: DP100KLS​
 
 ## Contributing
 
