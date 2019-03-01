@@ -1,12 +1,15 @@
-## 1_Overview:
+# Overview
+
 Estimated Time: 15-20 minutes
 
-### Introduction and Motivation
+## Introduction and Motivation
 
-#### Looking back  
+## Looking back
+
 In the previous labs, we built an end-to-end scenario that allows you to pull in your own pictures, use Cognitive Services to find objects and people in the images, create a description of the images, and store all of that data in CosmosDB. Then we used CosmosDB to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
 
-#### What next?  
+## What next
+
 As you know, once you deploy any application or process, it's never *really* complete. There are always additions. Sometimes development happens in phases. Sometimes the requirements change. Well, a bot is just a type of an application, so the same idea applies here.  
 
 Let's say, for the purposes of this scenario, you want to enhance PictureBot. Now, due to the title of this section, you may have already inferred what is coming next. However, take a few minutes to brainstorm with a neighbor some ways you might be able to make PictureBot better.  
@@ -23,11 +26,12 @@ In this lab, we'll try to improve the user experience by giving users the option
 
 ![Architecture Diagram Phase 2](./resources/assets/AI_Immersion_Arch_Bing.png)
 
-#### Bing Search
+## Bing Search
 
 Before we get into the lab, let's back up and talk about the Bing Search APIs. The Bing Search APIs add intelligent search to your app, combining hundreds of billions of webpages, images, videos, and news to provide relevant results with no ads.  
 
 The Bing Search APIs fall into the "search" category of [Azure Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/), and there are currently eight of them:  
+
 * [Bing News Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web): Returns a list of news articles that Bing determines are relevant to a user's query
 * [Bing Web Search](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/overview): Returns similar results as Bing, can include web pages, images, videos, and more
 * [Bing Video Search](https://docs.microsoft.com/en-us/azure/cognitive-services/Bing-Video-Search/search-the-web): Returns videos that Bing determines are relevant to a query
@@ -39,10 +43,10 @@ The Bing Search APIs fall into the "search" category of [Azure Cognitive Service
 
 Take a few minutes to explore some the capabilities of the various service (each link should take you to more information about the service). Discuss with your neighbor at least one thing you learned that the Bing Search APIs can do that you did not know.  
 
+## Lab options  
 
-#### Lab options  
+Depending on your previous experience and your experience in this workshop, you might (hopefully) be feeling more comfortable and confident with Cognitive Services and the Bot Framework. For this last lab, you have two options:
 
-Depending on your previous experience and your experience in this workshop, you might (hopefully) be feeling more comfortable and confident with Cognitive Services and the Bot Framework. For this last lab, you have two options:  
 1. Continue to the [next page](./2_Bing_Search.md) to receive step-by-step instructions, resources, etc. (just as in previous labs).
 2. Do not open the next file. Instead, try integrating Bing Image Search API to your bot without assistance. If you choose this option, you should understand that you **will not receive debugging assistance** from the instructor. You can peek at the solution file (under **resources > code**) or the [next page](./2_Bing_Search.md) for ideas.  
 
