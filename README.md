@@ -10,7 +10,7 @@ In this course, you will focus on hands-on activities that develop proficiency i
 You will also learn to leverage other AI-oriented services such as Azure Search and Azure Bot Services. 
 These labs assume an introductory to intermediate knowledge of these services, and, if this is not the case, then you should spend the time working through the prerequisites.
 
-This training is two days long, but you can compress the content with [alternative agendas](./alternative-agendas).
+This training is two days long, but you can compress the content with [alternative agendas](./alternative-agendas/one-day-deltas.md).
 
 > **!!Important note 09/28/2018!!**: The Microsoft Bot Builder SDK V4 went GA at Ignite this week. The bot labs have been updated to SDK V4, but the SDK V3 labs are located in the resources folder for the bot labs (not being maintained). Additionally, we have moved the logging and testing labs to supplementary exercises (not being maintained at the moment), and the bootcamp will focus on the addition of the Bing Search APIs to bots and other applications.  
 > If you are an instructor redelivering this course and have questions, please email learnAI@microsoft.com.  
