@@ -91,16 +91,16 @@ Contact us: learnAI@microsoft.com and <http://aka.ms/LearnAI-GitHub>
 
 ## Certifications
 
-The LearnAI team had intense participation in the creation of the following new Microsoft certifications:
+The LearnAI team had intense participation in the creation of the following new Microsoft certifications and its required tests:
 
-+ Azure Data Engineer​
-  + DP-200: Implementing an Azure Data Solution ​
++ [Azure Data Engineer​](https://www.microsoft.com/en-us/learning/azure-data-engineer.aspx)
+  + DP-200: Implementing an Azure Data Solution
   + DP-201: Designing an Azure Data Solutions​
 
-+ Azure AI Engineer​
-  + AI-100: Designing and Implementing an Azure AI Solution ​
++ [Azure AI Engineer​](https://www.microsoft.com/en-us/learning/azure-ai-engineer.aspx)
+  + AI-100: Designing and Implementing an Azure AI Solution
 
-+ Azure Data Scientist ​
++ [Azure Data Scientist](https://www.microsoft.com/en-us/learning/azure-data-scientist.aspx)
   + DP-100: Designing and Implementing a Data Science Solution on Azure​
 
 ## Contributing
