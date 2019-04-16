@@ -4,7 +4,7 @@ Estimated Time: 60-75 minutes
 
 ## Important - Temporary Warning - April 2019
 
-This lab is under maintenance. Please start from the Finished Solution, under the **resources/code/FinishedPictureBot-Part0** folder. Also, you need to follow [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) process to deploy your Bot to Azure, instead of using part 4 of this lab, "4_Publishing_and_Register".
+This lab is under maintenance. Please start from the Finished Solution, under the **resources/code/FinishedPictureBot-Part0** folder and go to the next lab. Also, you need to follow [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) process to deploy your Bot to Azure, instead of using part 4 of this lab, "4_Publishing_and_Register".
 
 ## Building a Bot
 
