@@ -4,7 +4,7 @@ Estimated Time: 60-75 minutes
 
 ## Important Note - April 2019 - Workaround Instructions - Beginning
 
-This lab, **1_Dialogs_and_Regex**, is under maintenance. The hands-on activities won't work, since the EchoBot template changed. To complete this training, please follow the workaround steps below:
+This lab, **1_Dialogs_and_Regex**, is under maintenance. The hands-on activities won't work, since the EchoBot template changed. To complete this Bootcamp, please follow the workaround steps below:
 
 1. The theory present in this lab is still relevant. You should read everything, but don't create, download, open, remove, or rename anything.
 1. Using the "Finished Solution", located in the **resources/code/FinishedPictureBot-Part0** folder, start from the [2_Azure_Search](./2_Azure_Search.md) lab. 
