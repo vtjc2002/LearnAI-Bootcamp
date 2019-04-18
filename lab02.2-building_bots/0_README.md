@@ -2,10 +2,6 @@
 
 This hands-on lab guides you through creating an intelligent bot from end-to-end using the Microsoft Bot Framework, Azure Search, and Microsoft's Language Understanding Intelligent Service (LUIS).
 
-> **[09/29/2018] Important Note!**  
-> The v4 SDK for the bot framework recently went [GA](https://github.com/Microsoft/botbuilder-dotnet). If you would like to complete lab02.2-building_bots with the v3 SDK (instead of the v4 SDK), refer [here](./resources/SDK_V3_Labs), but note that we will not be maintaining the V3 labs going forward.
-> If you are an instructor redelivering this course and have questions, please email learnanalytics@microsoft.com.  
-
 ## Objectives
 
 In this workshop, you will:
