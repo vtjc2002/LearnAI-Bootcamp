@@ -75,7 +75,7 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 >- botFilePath:
 >- botFileSecret:
 
-### Setting up for bot development - Bot Framework Emulator
+## Setting up for bot development - Bot Framework Emulator
 
 We will be developing a bot using the latest .NET SDK (v4).  To get started, we'll need to download the Bot Framework Emulator, and we'll need to create a Web App Bot and get the source code.  
 
@@ -100,4 +100,4 @@ This workshop has been broken down into five sections:
 - [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by re-publishing and registering our bot.
 - [5_Closing](./5_Closing.md): Here you'll find a summary of what you've done and where to learn more.
 
-### Continue to [1_Dialogs_and_Regex](./1_Dialogs_and_Regex.md)
+## Continue to [1_Dialogs_and_Regex](./1_Dialogs_and_Regex.md)
