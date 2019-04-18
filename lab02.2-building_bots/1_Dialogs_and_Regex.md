@@ -4,7 +4,10 @@ Estimated Time: 60-75 minutes
 
 ## Important - Temporary Warning - April 2019
 
-This lab is under maintenance. Using the "Finished Solution", located in the **resources/code/FinishedPictureBot-Part0** folder, start from the [2_Azure_Search](./2_Azure_Search.md) lab. Also, you need to follow [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) process to deploy your Bot to Azure, instead of using part 4 of this lab, "4_Publishing_and_Register".
+This lab is under maintenance. Using the "Finished Solution", located in the **resources/code/FinishedPictureBot-Part0** folder, start from the [2_Azure_Search](./2_Azure_Search.md) lab. 
+Also, you need to follow [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) process to deploy your Bot to Azure, instead of using part 4 of this lab, "4_Publishing_and_Register".
+
+**The theory present in this lab is still relevant, including the process of downloading, from the Azure portal, the code of a template. You can, and you should, read everything. Just do not perform any action and follow the instructions in the paragraph above.**
 
 **There is no target date for when the maintenance of this lab will be made. Every collaboration is welcome.**
 
