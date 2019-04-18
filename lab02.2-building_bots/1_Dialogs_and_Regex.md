@@ -6,6 +6,8 @@ Estimated Time: 60-75 minutes
 
 This lab is under maintenance. Using the "Finished Solution", located in the **resources/code/FinishedPictureBot-Part0** folder, start from the [2_Azure_Search](./2_Azure_Search.md) lab. Also, you need to follow [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) process to deploy your Bot to Azure, instead of using part 4 of this lab, "4_Publishing_and_Register".
 
+**There is no target date for when the maintenance of this lab will be made. Every collaboration is welcome.**
+
 ## Building a Bot
 
 We assume that you've had some exposure to the Bot Framework. If you have, great. If not, don't worry too much, you'll learn a lot in this section, but you may want to take it slow. We recommend completing [this tutorial](https://docs.microsoft.com/en-us/azure/bot-service/dotnet/bot-builder-dotnet-sdk-quickstart?view=azure-bot-service-4.0) and checking out the [documentation](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0).
