@@ -1,12 +1,18 @@
----
-layout: default
----
-
 # Logging with Microsoft Bot Framework 
 
 This hands-on lab guides you through enabling various logging scenarios for your bot solutions.  
 
->**!Important Note!**: These labs have not been updated since August 1, 2018. When they are updated, we'll update this note.
+## Important Note - May 2019 - Beginning
+
+All of the Logging conversations labs have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
+You can execute these labs on your own, but there is no guarantee that they will work.
+
+You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-tutorial-persist-user-inputs?view=azure-bot-service-4.0&tabs=csharp) official material to guide you.
+
+**Stay tuned for further updates. Every collaboration is welcome.**
+
+## Important Note - April 2019 - End
+
 
 ## Objectives
 This workshop demonstrates how you can perform logging using Microsoft Bot Framework and store aspects of chat conversations. After completing these labs, you should be able to:  
