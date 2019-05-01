@@ -1,8 +1,15 @@
 # Testing Bots with Microsoft Bot Framework
 
-This hands-on lab guides you through some of the basics of testing bots.  
+## Important Note - May 2019 - Beginning
 
->**!Important Note!**: These labs have not been updated since August 1, 2018. When they are updated, we'll update this note.
+All of the **Testing Bots** labs have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
+You can execute these labs on your own, but there is no guarantee that they will work.
+
+You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-testing-debugging?view=azure-bot-service-4.0) official material to guide you.
+
+**Stay tuned for further updates. Every collaboration is welcome.**
+
+## Important Note - April 2019 - End
 
 ## Objectives 
 
