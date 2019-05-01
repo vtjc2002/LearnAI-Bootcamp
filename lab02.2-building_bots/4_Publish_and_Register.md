@@ -8,7 +8,7 @@ Estimated Time: 10-15 minutes
 This have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
 You can execute this lab on your own, but there is no guarantee that it will work.
 
-You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) official material to guide you.
+You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) official material as a reference, but you need to find, by yourself, what are the actions required to make it work.
 
 **Stay tuned for further updates. Every collaboration is welcome.**
 
