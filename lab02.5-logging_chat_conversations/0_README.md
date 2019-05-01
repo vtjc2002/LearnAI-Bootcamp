@@ -4,7 +4,7 @@ This hands-on lab guides you through enabling various logging scenarios for your
 
 ## Important Note - May 2019 - Beginning
 
-All of the Logging conversations labs have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
+All of the **Logging Conversations** labs have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
 You can execute these labs on your own, but there is no guarantee that they will work.
 
 You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-tutorial-persist-user-inputs?view=azure-bot-service-4.0&tabs=csharp) official material to guide you.
