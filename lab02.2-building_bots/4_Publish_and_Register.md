@@ -1,5 +1,19 @@
-## 4_Publish_and_Register:
+# 4_Publish_and_Register:
+
 Estimated Time: 10-15 minutes
+
+
+## Important Note - May 2019 - Beginning
+
+This have not been updated since August 1, 2018. And for now, there are no plans for any maintenance.
+You can execute this lab on your own, but there is no guarantee that it will work.
+
+You can use [this](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp) official material to guide you.
+
+**Stay tuned for further updates. Every collaboration is welcome.**
+
+## Important Note - April 2019 - End
+
 
 ### Lab 4.1: Re-publish your bot
 
