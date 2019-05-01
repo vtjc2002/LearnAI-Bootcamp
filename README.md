@@ -71,12 +71,6 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 3:15-4:15: [Business Case II - Bots](./lab02.4-bootcamp_case_2/Case_Part2.md)
   - 4:15-5: Q&A and Feedback for Emerging AI Bootcamp
 
-## Supplementary materials
-
-The LearnAI team has provided some extra labs you may be interested in:
-
-- [Lab 2.5: Log Chat Conversations in your Bot](./lab02.5-logging_chat_conversations/0_README.md)
-- [Lab 2.6: Testing your Bot](./lab02.6-testing_bots/0_README.md)
 
 ## Related courses
 
